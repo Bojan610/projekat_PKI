@@ -1,0 +1,10 @@
+
+.unauthorized-wrapper {
+    height: 100vh;
+    text-align: center;
+    background-color: #D3C494
+}
+.unauthorized-wrapper h1 {
+    margin: 0;
+    padding-top: 50px;
+}

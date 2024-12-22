@@ -1,0 +1,27 @@
+<section class="login">
+    <div class="login-holder">
+        <img src="pki_logo.png" alt="logo"/>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+            <div class="control-row">
+              <div class="control">
+                <label for="korisnickoIme">Korisničko ime:</label>
+                <input id="korisnickoIme" type="text" formControlName="korisnickoIme"/>
+              </div>
+          
+              <div class="control">
+                <label for="lozinka">Lozinka:</label>
+                <input id="lozinka" type="password" formControlName="lozinka"/>
+              </div>
+
+              @if (usernameIsInvalid || passwordIsInvalid) {
+                <p class="control-error">Molimo pravilno unesite podatke!</p>
+              }           
+          
+              <button class="button my-button">Prijava</button>
+            </div>
+
+        </form>
+    </div>
+</section>
