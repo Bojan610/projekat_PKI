@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 import { LogInComponent } from './login/login.component';
-import { LogInService, resolveUser } from './services/login.service';
+import { LogInService } from './services/login.service';
 import { AuthGuard } from './authGuard/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { OrganizatorService } from './services/organizator.service';
+import { LogoutComponent } from './logout/logout.component';
 
 export const routes: Routes = [
     {
@@ -18,18 +20,47 @@ export const routes: Routes = [
     },
     {
         path: 'organizator/:userName',
-        //providers: [LogInService],
-        loadComponent: () => import('./homepage-org/homepage-org.component').then(mod => mod.HomepageOrgComponent), 
+        loadComponent: () => import('./organizator/organizator.component').then(mod => mod.OrganizatorComponent),
         canActivate: [AuthGuard],
-        resolve: { userFromPath: resolveUser},
-        title: 'Trenuci za pamcenje - Pocetna' 
+        children: [
+            {
+                path: '',
+                redirectTo: 'home',
+                pathMatch: 'prefix'
+
+            },
+            {
+                path: 'home',
+                providers: [OrganizatorService],      //setting lazy loading of service
+                loadComponent: () => import('./homepage-org/homepage-org.component').then(mod => mod.HomepageOrgComponent), 
+                canActivate: [AuthGuard],
+                title: 'Trenuci za pamcenje - Pocetna'
+
+            },
+            {
+                path: 'mojprofil',      
+                loadComponent: () => import('./my-profile/my-profile.component').then(mod => mod.MyProfileComponent),
+                canActivate: [AuthGuard],
+                title: 'Trenuci za pamcenje - Moj profil' 
+            },
+            {
+                path: 'dogadjaji',   
+                providers: [OrganizatorService],   
+                loadComponent: () => import('./events/events.component').then(mod => mod.EventsComponent),
+                canActivate: [AuthGuard],
+                title: 'Trenuci za pamcenje - Dogadjaji' 
+            },
+            {
+                path: 'logout',
+                component: LogoutComponent
+            },
+        ]
     },
     {
         path: 'kupac/:userName',
         //providers: [LogInService],
         loadComponent: () => import('./homepage-kupac/homepage-kupac.component').then(mod => mod.HomepageKupacComponent), 
         canActivate: [AuthGuard],
-        resolve: { userFromPath: resolveUser},
         title: 'Trenuci za pamcenje - Pocetna' 
     },
     {

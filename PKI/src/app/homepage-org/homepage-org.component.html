@@ -1,2 +1,37 @@
-<p>homepage-org works!</p>
-<p>{{userFromPath?.userName}}</p>
+<section class="homepage-wrapper sections-wrapper">
+   
+        <div class="slideshow">
+            <!-- Left Arrow -->
+            <button class="carousel-control-prev controls" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" (click)="previousSlide()">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <div [style.transform]="'translateX(-' + currentIndex * 100 + '%)'" class="wrapper">
+                <div *ngFor="let promotion of promotions" [style.--bg-image]="'url(' + promotion.image + ')'" class="content">                  
+                   <div class="text-holder">  
+                        @if (promotion.title && promotion.description) {           
+                            <h1>{{promotion.title}}</h1>
+                            <h2>{{promotion.description}}</h2>
+                            <button class="editPromotion" (click)="openPopup(promotion.id)"><i class="bi bi-pen"></i></button>
+                        } @else {
+                            <button class="open-popup" (click)="openPopup(promotion.id)"><i class="bi bi-plus-circle plus-icon"></i></button>
+                            <p class="add-promotion">Dodaj promociju</p>                        
+                        }
+                    </div>
+                </div>
+            </div>
+           <!-- Right Arrow -->
+            <button class="carousel-control-next controls" type="button" data-bs-target="#carouselExample" data-bs-slide="next" (click)="nextSlide()">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            <div class="dots">
+                <ul>
+                    <li *ngFor="let promotion of promotions" [class.active]="promotion.id === currentIndex.toString()" (click)="onSelectSlide(promotion.id)"></li>
+                </ul>
+            </div>
+        </div>
+
+        <app-promotion-popup *ngIf="isPopupVisible" [promotionId]="promotionToChange" (close)="closePopup()"></app-promotion-popup>
+</section>
+

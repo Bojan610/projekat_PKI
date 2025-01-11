@@ -24,4 +24,9 @@
 }
 .login .login-holder form .my-button {
     margin-top: 30px;
+    background-color: #E0BE55;
+}
+.login .login-holder form .my-button:hover {
+    margin-top: 30px;
+    background-color: #D3C494;
 }

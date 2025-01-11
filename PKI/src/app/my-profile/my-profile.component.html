@@ -1,0 +1,59 @@
+<section class="my-profile-wrapper sections-wrapper">
+   <div class="header">
+        <h1>Moj Profil</h1>
+        <h2>{{userName}}</h2>
+   </div>
+   <form [formGroup]="form" #myForm>       
+        <div class="control-row">
+            <div class="column">
+                <div class="control">
+                    <label for="name">Ime:</label>
+                    <button class="editInfo" (click)="editInfo(name)"><i class="bi bi-pen"></i></button>
+                    <input #name id="name" type="text" formControlName="name" [(ngModel)]="modifiedUser.firstName" readonly/>
+                </div>
+            
+                <div class="control">
+                    <label for="lastName">Prezime:</label>
+                    <button class="editInfo" (click)="editInfo(lastName)"><i class="bi bi-pen"></i></button>
+                    <input #lastName id="lastName" type="text" formControlName="lastName" [(ngModel)]="modifiedUser.lastName" readonly/>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="control">
+                    <label for="tel">Telefon:</label>
+                    <button class="editInfo" (click)="editInfo(tel)"><i class="bi bi-pen"></i></button>
+                    <input #tel id="tel" type="text" formControlName="tel" [(ngModel)]="modifiedUser.tel" readonly/>
+                </div>
+            
+                <div class="control">
+                    <label for="address">Adresa:</label>
+                    <button class="editInfo" (click)="editInfo(address)"><i class="bi bi-pen"></i></button>
+                    <input #address id="address" type="text" formControlName="address" [(ngModel)]="modifiedUser.address" readonly/>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="control">
+                    <label for="userName">Korisničko ime:</label>
+                    <input id="userName" type="text" formControlName="userName" [ngModel]="modifiedUser.userName" readonly/>
+                </div>     
+                <button class="my-button change-password" (click)="openPopup()">Izmena lozinke</button>
+            </div>          
+        </div>
+    </form>
+    <div class="btn-holder">
+        @if (successMessage) {
+            <p class="success-message">{{successMessage}}</p>
+        } 
+        @if (errorMessage) {
+            <p class="error-message">{{errorMessage}}</p>
+        }   
+        <button class="my-button save" (click)="onSave(myForm)" [class.active]="enableEdit">Sačuvaj izmene</button>
+        <button class="my-button cancel" (click)="onCancel(myForm)">Odustani</button>
+    </div>
+
+    <app-change-password-popup *ngIf="isPopupVisible" [userName]="userName" (close)="closePopup()"></app-change-password-popup>
+    
+</section>
+

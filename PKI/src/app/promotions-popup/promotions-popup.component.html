@@ -1,0 +1,23 @@
+<div class="popup-overlay" (click)="closePopup()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <button (click)="closePopup()" class="close-popup-btn">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <h2>Biranje promocije</h2>
+        <p>Događaji</p>
+        <div class="events-holder">
+            <div *ngFor="let event of events let i = index" class="event">  
+                <div class="img-holder" [style.backgroundImage]="'url(' + event.image + ')'"></div>                
+                <div class="text-content">
+                    <h3>{{event.title}}</h3>
+                    <div class="description-holder">
+                        <button class="my-button" [class.enabled]="enableSelect[i]" (click)="onSelectEvent(event.id, i)">Izaberi</button>
+                        <p>Opis:</p>
+                        <input type="text" [(ngModel)]="inputValues[i]" (ngModelChange)="onModelChange($event, i)"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

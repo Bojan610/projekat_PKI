@@ -20,7 +20,7 @@ export class LogInService {
         if (user) {
             sessionStorage.setItem('user', userName); // Save user data
             if (user.kindOfUser === 'organizator') {
-                this.router.navigate(['organizator/' + userName]); 
+                this.router.navigate(['organizator', userName]); 
             } else {
                 this.router.navigate(['kupac/' + userName]); 
             }           
@@ -31,12 +31,37 @@ export class LogInService {
     }
 
     getUser(userName: string) {
-        return this.users.find((user) => user.userName === userName);
+        return {...this.users.find((user) => user.userName === userName)!};
+    }
+
+    updateUser(newUser: User):boolean { 
+        if (newUser) {
+            const index = this.users.findIndex(user => user.userName === newUser.userName);
+            if (index !== -1) {
+              this.users[index] = newUser;
+              return true;
+            } else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
+    updatePassword(userName?:string, newPassword?: string):boolean {
+        let user = this.users.find((user) => user.userName === userName);
+        if (user && newPassword) {
+            user.password = newPassword;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
-export const resolveUser: ResolveFn<User | undefined> = (activatedRoute: ActivatedRouteSnapshot) => {
-    const loginService = inject(LogInService);
-    const userFromPath = loginService.getUser(activatedRoute.paramMap.get('userName') || '');
+// export const resolveUser: ResolveFn<User | undefined> = (activatedRoute: ActivatedRouteSnapshot) => {
+//     const loginService = inject(LogInService);
+//     const userFromPath = loginService.getUser(activatedRoute.paramMap.get('userName') || '');
   
-    return userFromPath;
-};
+//     return userFromPath;
+// };
