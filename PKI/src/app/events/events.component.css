@@ -1,0 +1,124 @@
+.events {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3%;
+    padding: 5vh 0 10px 0;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+.event {
+    width: 25%;
+    border: 1px solid #E0BE55;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #fff;
+}
+.event .img-holder {
+    height: 45vh;
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px 10px 0 0;
+}
+.event h2 {
+    margin: 5px 0;
+    font-weight: 600;
+    font-size: 1.7em;
+}
+.event .price-holder {
+    text-align: left;
+    padding: 0 10px;
+}
+.event .price-holder .price {
+    font-weight: 700;
+    font-size: 1.5em;
+}
+.event .price-holder p {
+    margin: 0;
+    font-size: 1em;
+}
+.event .btn-holder {
+    margin: 20px 0;
+}
+.event .btn-holder .my-button {
+    margin: 0 5px;
+}
+.event .btn-holder .my-button.change {
+    background-color: #E0BE55;
+}
+.event .btn-holder .my-button.change:hover {
+    background-color: #D3C494;
+}
+.event .btn-holder .my-button.delete {
+    background-color: #F11717;
+    color: #fff;
+}
+.event .btn-holder .my-button.delete:hover {
+    background-color: #d81111;
+}
+
+.add-event-btn-holder {
+    width: 100%;
+    max-width: 1500px;
+    text-align: right;
+    margin: 40px auto;
+    padding: 0 30px;
+}
+.add-event-btn-holder .add-event {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+.add-event-btn-holder .add-event:hover {
+    background-color: #fff;
+    border-color: #000;
+    color: #000;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding-bottom: 40px;
+}
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 15px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.pagination button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+.pagination span {
+    margin: 0 20px;
+    color: #fff;
+}
+
+@media (max-width: 1023px) {
+    .event {
+        width: 29%;
+    }
+    .event h2 {
+        font-size: 1.6em;
+    }
+}
+
+@media (max-width: 767px) {
+    .event {
+        width: 90%;
+        margin: 20px 0;
+    }
+    .add-event-btn-holder {
+        margin: 10px auto 40px auto;
+    }
+}
+  

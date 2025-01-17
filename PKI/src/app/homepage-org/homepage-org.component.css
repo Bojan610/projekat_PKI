@@ -42,8 +42,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: 
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), var(--bg-image); /* Replace with your image */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), var(--bg-image); 
 }
 .homepage-wrapper .slideshow .content .text-holder {
     position: relative; /* Ensure the text stays above the background */

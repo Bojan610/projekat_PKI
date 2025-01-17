@@ -1,0 +1,36 @@
+<div class="popup-overlay" (click)="closePopup()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <button (click)="closePopup()" class="close-popup-btn">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <h2>Izmena događaja</h2>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+            <div class="control-row">
+              <div class="control name">
+                <label for="name">Naziv:</label>
+                <input id="name" type="text" formControlName="name" [ngModel]="modifiedEvent!.title"/>
+              </div>
+          
+              <div class="control price">
+                <label for="price">Cena:</label>
+                <input id="price" type="number" formControlName="price" [ngModel]="modifiedEvent!.price"/>
+              </div>
+            </div>
+
+            <div class="control">
+                <label for="description">Opis:</label>
+                <textarea id="description" type="text" formControlName="description" [ngModel]="modifiedEvent!.description"></textarea>
+            </div>
+
+            @if (errorMessage) {
+                <p class="control-error">{{errorMessage}}</p>
+            }  
+
+            <div class="btn-holder">
+                <button class="button my-button save">Izmeni</button>
+            </div>
+        </form>
+    </div>
+  </div>
+  

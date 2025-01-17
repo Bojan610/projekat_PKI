@@ -1,0 +1,153 @@
+.event-holder {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 100px;
+    width: 90%;
+    max-width: 1800px;
+    margin: 0 auto;
+    border-bottom: 2px solid #E0BE55;
+}
+.event-holder .col {
+    width: 50%;
+    padding: 0 2%;
+}
+.event-holder .col.col-2 {
+    text-align: center;
+    position: relative;
+}
+.event-holder .col.col-2 .price-and-buttons {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-right: 8%;
+}
+.event-holder .col.col-2 .price-and-buttons .price-holder {
+    text-align: left;
+}
+.event-holder .col.col-2 .price-and-buttons .price-holder p {
+    margin: 0;
+}
+.event-holder .col.col-2 .price-and-buttons .price-holder .price {
+    font-weight: 600;
+    font-size: 1.4em;
+}
+.event-holder .col.col-2 .price-and-buttons .btn-holder {
+    text-align: right;
+}
+.event-holder .col.col-2 .price-and-buttons .btn-holder .editEvent {
+    background-color: transparent;
+    border: none;
+}
+.event-holder .col.col-2 .price-and-buttons .btn-holder .editEvent i {
+    font-size: 1.2em;
+    color: #fff;
+}
+.event-holder .col.col-2 .price-and-buttons .btn-holder .my-button {
+    display: block;
+    margin: 10px auto;
+}
+.event-holder .col.col-2 .price-and-buttons .btn-holder .my-button.cancel {
+    background-color: #bbb;
+}
+.event-holder .col.col-2 .price-and-buttons .btn-holder .my-button.cancel.active {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+.event-holder .col.col-2 .price-and-buttons .btn-holder .my-button.cancel.active:hover {
+    background-color: #fff;
+    color: #000;
+}
+.event-holder .col.col-2 .price-and-buttons .btn-holder .my-button.save {
+    background-color: #5FAF67;
+}
+.event-holder .col.col-2 .price-and-buttons .btn-holder .my-button.save.active {
+    background-color: #1DBB2C;
+}
+.event-holder .col.col-2 .price-and-buttons .btn-holder .my-button.save.active:hover {
+    background-color: #149921;
+}
+h2 {
+    color: #fff;
+    margin-bottom: 30px;
+    font-family: "BenchNine", serif;
+    font-weight: 300;
+    font-size: 3em;
+}
+.event-holder .col-2 p {
+    color: #fff;
+}
+.event-holder .col-2 .description {
+    margin-bottom: 150px;
+}
+.event-holder .back-btn {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+}
+.event-holder .back-btn i {
+    font-size: 1.8em;
+    padding-right: 15px;
+}
+.event-holder .col-1 .img-holder {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), var(--bg-image); 
+    height: 65vh;
+    min-height: 400px;
+    max-height: 700px;
+    background-size: cover;
+    background-position: center;
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.event-holder .col-1 .img-holder .edit {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+.event-holder .col-1 .img-holder .edit:hover {
+    background-color: #fff;
+    color: #000;
+}
+.event-holder .col-1 .img-holder .edit i {
+    margin-right: 10px;
+    font-size: 0.9em;
+}
+.event-holder .col-1 .control-success {
+    color: #fff;
+    margin: 5px 0 0;
+}
+
+.reviews {
+    text-align: center;
+    padding: 30px 0;
+}
+
+@media (max-width: 1200px) {
+    h2 {
+        font-size: 2.8em;
+    }
+}
+
+@media (max-width: 1023px) {
+    h2 {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 767px) {
+    h2 {
+        font-size: 2.3em;
+    }
+    .event-holder .col {
+        width: 100%;
+    }
+}

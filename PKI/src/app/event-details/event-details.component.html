@@ -1,0 +1,42 @@
+<div class="event-holder">
+    <div class="col-1 col">
+        <button class="back-btn" (click)="closeEvent()"><i class="bi bi-arrow-left-circle"></i> Nazad na događaje</button>
+        <div class="img-holder" [style.--bg-image]="'url(' + modifiedEvent?.image + ')'">
+            <button class="my-button edit" (click)="selectImage()"><i class="bi bi-pen"></i>Promeni sliku</button>
+            <input
+                type="file"
+                accept="image/*"
+                #fileInput
+                (change)="onFileSelected($event)"
+                style="display: none"
+            />
+        </div>
+        @if (successMessage) {
+            <p class="control-success">{{successMessage}}</p>
+        }  
+        @if (errorMessage) {
+            <p class="control-error">{{errorMessage}}</p>
+        }  
+    </div>
+    <div class="col-2 col">
+        <h2>{{modifiedEvent?.title}}</h2>
+        <p class="description">{{modifiedEvent?.description}}</p>
+        <div class="price-and-buttons">
+            <div class="price-holder">
+                <p>Cena:</p>
+                <p>od <span class="price">{{modifiedEvent?.price}}</span> RSD</p>
+            </div>
+            <div class="btn-holder">
+                <button class="editEvent" (click)="openPopup()"><i class="bi bi-pen"></i></button>
+                <button class="my-button save" (click)="onSave()" [class.active]="enableEdit">Sačuvaj izmene</button>
+                <button class="my-button cancel" (click)="onCancel()" [class.active]="enableEdit">Odustani</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-event-change-popup *ngIf="isPopupVisible" (close)="closePopup()" (formParameters)="enteredInfo($event)" [modifiedEvent]="modifiedEvent"></app-event-change-popup>
+
+<div class="reviews">
+    <h2>Recenzije</h2>
+</div>

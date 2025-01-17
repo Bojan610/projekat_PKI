@@ -1,0 +1,102 @@
+.add-event-holder {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 100px;
+    width: 90%;
+    max-width: 1800px;
+    margin: 0 auto;
+    border-bottom: 2px solid #E0BE55;
+}
+.add-event-holder .col {
+    width: 50%;
+    padding: 0 2%;
+}
+h2 {
+    color: #fff;
+    margin-bottom: 30px;
+    font-family: "BenchNine", serif;
+    font-weight: 300;
+    font-size: 3em;
+}
+.add-event-holder .col-1 .img-holder {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), var(--bg-image); 
+    height: 65vh;
+    min-height: 400px;
+    max-height: 700px;
+    background-size: cover;
+    background-position: center;
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add-event-holder .col-1 .img-holder .edit {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+.add-event-holder .col-1 .img-holder .edit:hover {
+    background-color: #fff;
+    color: #000;
+}
+.add-event-holder .col-1 .img-holder .edit i {
+    margin-right: 10px;
+    font-size: 0.9em;
+}
+.add-event-holder .col-2 form {
+    padding-top: 30px;
+}
+.add-event-holder .col-2 form .control {
+    margin: 20px 0;
+}
+.add-event-holder .col-2 form textarea {
+    height: 45vh;
+    max-height: 550px;
+    min-height: 250px;
+}
+.add-event-holder .col-2 form .price-and-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.add-event-holder .col-2 form .price-and-buttons .my-button {
+    display: block;
+    margin: 15px auto;
+}
+.add-event-holder .col-2 form .price-and-buttons .my-button.save {
+    background-color: #5FAF67;
+}
+.add-event-holder .col-2 form .price-and-buttons .my-button.save.active {
+    background-color: #1DBB2C;
+}
+.add-event-holder .col-2 form .price-and-buttons .my-button.cancel {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+.add-event-holder .col-2 form .price-and-buttons .my-button.cancel:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+@media (max-width: 1200px) {
+    h2 {
+        font-size: 2.8em;
+    }
+}
+
+@media (max-width: 1023px) {
+    h2 {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 767px) {
+    h2 {
+        font-size: 2.3em;
+    }
+    .event-holder .col {
+        width: 100%;
+    }
+}

@@ -1,0 +1,92 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.popup-content {
+    background: #D3C494;
+    padding: 10px 50px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    text-align: center;
+}
+.popup-content h2 {
+    font-family: "BenchNine", serif;
+    border-bottom: 3px solid #000;
+    padding-bottom: 20px;
+    font-size: 2.5em;
+}
+.popup-content .close-popup-btn {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    right: -48%;
+}
+.popup-content .close-popup-btn i {
+    font-size: 1.4em;
+}
+.popup-content form {
+    width: 100%;
+}
+.popup-content form label {
+    color: #000;
+}
+.popup-content form textarea {
+    min-height: 20vh;
+    max-height: 40vh;
+}
+.popup-content form .control-row {
+    display: flex;
+    justify-content: space-between;
+}
+.popup-content form .control-row .name {
+    width: 60%;
+}
+.popup-content form .control-row .price {
+    width: 20%;
+}
+.popup-content form .control-error {
+    text-align: left;
+}
+.popup-content form .btn-holder {
+    text-align: right;
+    margin: 20px 0 10px;
+}
+.popup-content form .btn-holder .my-button.save {
+    background-color: #1DBB2C;
+}
+.popup-content form .btn-holder .my-button.save:hover {
+    background-color: #149921;
+}
+
+@media (max-width: 1200px) {
+    .popup-content {
+      width: 60%;
+    }
+    .popup-content h2 {
+      font-size: 2.2em;
+    }
+}
+  
+@media (max-width: 767px) {
+    .popup-content {
+        width: 90%;
+        padding: 10px 30px;
+    }
+    .popup-content h2 {
+        font-size: 2em;
+    }
+    .popup-content form .control-row .price {
+        width: 25%;
+    }
+}

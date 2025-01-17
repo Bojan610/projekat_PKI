@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, input, Output } from '@angular/core';
-import { Event } from '../models/event.model';
+import { EventModel } from '../models/event.model';
 import { OrganizatorService } from '../services/organizator.service';
 import { FormsModule } from '@angular/forms';
 
@@ -11,14 +11,16 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./promotions-popup.component.css']
 })
 export class PopupComponent {
-  events: Event[] = [];
+  events: EventModel[] = [];
   inputValues: string[] = [];
   enableSelect: boolean[] = [];
   @Input({required: true}) promotionId!: string; // Input property
   @Output() close = new EventEmitter<void>();
 
-  constructor(private organizatorService: OrganizatorService) {
-    this.events = organizatorService.getEvents();
+  constructor(private organizatorService: OrganizatorService) { }
+
+  ngOnInit() {
+    this.events = this.organizatorService.getEvents();
   }
 
   onSelectEvent(eventId: string, index: number) {

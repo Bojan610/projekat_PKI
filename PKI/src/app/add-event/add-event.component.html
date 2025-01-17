@@ -1,0 +1,40 @@
+<div class="add-event-holder">
+    <div class="col col-1">
+        <h2>Novi događaj</h2>
+        <div class="img-holder" [style.--bg-image]="'url(' + eventToAdd.image + ')'">
+            <button class="my-button edit" (click)="selectImage()"><i class="bi bi-pen"></i>Promeni sliku</button>
+            <input
+                type="file"
+                accept="image/*"
+                #fileInput
+                (change)="onFileSelected($event)"
+                style="display: none"
+            />
+        </div>
+    </div>
+    <div class="col col-2">
+        <form [formGroup]="form">
+          
+            <div class="control-row">
+              <div class="control">
+                <input id="name" type="text" formControlName="name" placeholder="Naziv..."/>
+              </div>
+          
+              <div class="control">
+                <textarea id="description" type="text" formControlName="description" placeholder="Opis..."></textarea>
+              </div>
+            </div>
+
+            <div class="price-and-buttons">
+                <div class="control">
+                    <input id="price" type="number" formControlName="price" placeholder="Cena..."/>
+                </div>
+                <div class="btn-holder">
+                    <button class="button my-button save" (click)="onSave()" [class.active]="selectedImage && form.valid">Sačuvaj</button>
+                    <button class="button my-button cancel" (click)="closeAddEvent()">Odustani</button>
+                </div>
+            </div>
+         
+        </form>
+    </div>
+</div>

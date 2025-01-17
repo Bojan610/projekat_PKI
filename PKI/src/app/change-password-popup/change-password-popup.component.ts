@@ -29,7 +29,7 @@ export class ChangePasswordPopupComponent {
 
   constructor(private logInService: LogInService) { }
 
- form = new FormGroup({
+  form = new FormGroup({
     password: new FormControl('', {
       validators: [Validators.required, Validators.minLength(6)]
     }),

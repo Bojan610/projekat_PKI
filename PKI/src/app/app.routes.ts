@@ -20,6 +20,7 @@ export const routes: Routes = [
     },
     {
         path: 'organizator/:userName',
+        providers: [OrganizatorService],      //setting lazy loading of service
         loadComponent: () => import('./organizator/organizator.component').then(mod => mod.OrganizatorComponent),
         canActivate: [AuthGuard],
         children: [
@@ -30,8 +31,7 @@ export const routes: Routes = [
 
             },
             {
-                path: 'home',
-                providers: [OrganizatorService],      //setting lazy loading of service
+                path: 'home',         
                 loadComponent: () => import('./homepage-org/homepage-org.component').then(mod => mod.HomepageOrgComponent), 
                 canActivate: [AuthGuard],
                 title: 'Trenuci za pamcenje - Pocetna'
@@ -44,11 +44,10 @@ export const routes: Routes = [
                 title: 'Trenuci za pamcenje - Moj profil' 
             },
             {
-                path: 'dogadjaji',   
-                providers: [OrganizatorService],   
+                path: 'dogadjaji',     
                 loadComponent: () => import('./events/events.component').then(mod => mod.EventsComponent),
                 canActivate: [AuthGuard],
-                title: 'Trenuci za pamcenje - Dogadjaji' 
+                title: 'Trenuci za pamcenje - Dogadjaji'
             },
             {
                 path: 'logout',

@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Promotion } from "../models/promotion.model";
-import { Event } from "../models/event.model";
+import { EventModel } from "../models/event.model";
 
 @Injectable()
 export class OrganizatorService {
     private promotions: Promotion[] = [];
-    private events: Event[] = [];
+    private events: EventModel[] = [];
 
     constructor() {
         this.promotions = [
@@ -30,15 +30,7 @@ export class OrganizatorService {
    getPromotionById(promotionId: string) {
     return this.promotions.find((promotion) => promotion.id === promotionId);
    }
-
-   getEvents() {
-    return [...this.events];
-   } 
-
-   getEventById(eventId: string) {
-        return this.events.find((event) => event.id === eventId);
-   }
-
+   
    updatePromotion(promotionId: string, eventId: string, description: string):boolean {
         let event = this.getEventById(eventId);
         let promotion = this.getPromotionById(promotionId);
@@ -53,4 +45,46 @@ export class OrganizatorService {
             return false;
         }
    }
+
+   getEvents() {
+    return [...this.events];
+   } 
+
+   getEventById(eventId: string) {
+        return this.events.find((event) => event.id === eventId);
+   }
+
+   removeEvent(eventId: string):boolean {
+        this.events = this.events.filter(item => item.id !== eventId);
+        return true;
+   }
+
+   updateEvent(eventToUpdate: EventModel) {
+        if (eventToUpdate) {
+            const index = this.events.findIndex(event => event.id === eventToUpdate.id);
+            if (index !== -1) {
+                this.events[index] = {...eventToUpdate};
+                return true;
+            } else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
+    getNextEventId(): string {
+        const length = this.getEvents().length;
+        return length.toString();
+    }
+
+    addEvent(event: EventModel):boolean {
+        if (event) {
+            this.events.push(event);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
