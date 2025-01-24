@@ -20,7 +20,6 @@ export const routes: Routes = [
     },
     {
         path: 'organizator/:userName',
-        providers: [OrganizatorService],      //setting lazy loading of service
         loadComponent: () => import('./organizator/organizator.component').then(mod => mod.OrganizatorComponent),
         canActivate: [AuthGuard],
         children: [
@@ -35,7 +34,6 @@ export const routes: Routes = [
                 loadComponent: () => import('./homepage-org/homepage-org.component').then(mod => mod.HomepageOrgComponent), 
                 canActivate: [AuthGuard],
                 title: 'Trenuci za pamcenje - Pocetna'
-
             },
             {
                 path: 'mojprofil',      
@@ -50,6 +48,12 @@ export const routes: Routes = [
                 title: 'Trenuci za pamcenje - Dogadjaji'
             },
             {
+                path: 'rezervacije',     
+                loadComponent: () => import('./reservations-organizator/reservations-organizator.component').then(mod => mod.ReservationsOrganizatorComponent),
+                canActivate: [AuthGuard],
+                title: 'Trenuci za pamcenje - Rezervacije'
+            },
+            {
                 path: 'logout',
                 component: LogoutComponent
             },
@@ -57,10 +61,50 @@ export const routes: Routes = [
     },
     {
         path: 'kupac/:userName',
-        //providers: [LogInService],
-        loadComponent: () => import('./homepage-kupac/homepage-kupac.component').then(mod => mod.HomepageKupacComponent), 
+        loadComponent: () => import('./kupac/kupac.component').then(mod => mod.KupacComponent), 
         canActivate: [AuthGuard],
-        title: 'Trenuci za pamcenje - Pocetna' 
+        children: [
+            {
+                path: '',
+                redirectTo: 'home',
+                pathMatch: 'prefix'
+
+            },
+            {
+                path: 'home',         
+                loadComponent: () => import('./homepage-kupac/homepage-kupac.component').then(mod => mod.HomepageKupacComponent), 
+                canActivate: [AuthGuard],
+                title: 'Trenuci za pamcenje - Pocetna'
+            },
+            {
+                path: 'mojprofil',      
+                loadComponent: () => import('./my-profile/my-profile.component').then(mod => mod.MyProfileComponent),
+                canActivate: [AuthGuard],
+                title: 'Trenuci za pamcenje - Moj profil' 
+            },
+            {
+                path: 'dogadjaji',     
+                loadComponent: () => import('./events-kupac/events-kupac.component').then(mod => mod.EventsKupacComponent),
+                canActivate: [AuthGuard],
+                title: 'Trenuci za pamcenje - Dogadjaji'
+            },
+            {
+                path: 'korpa',     
+                loadComponent: () => import('./cart/cart.component').then(mod => mod.CartComponent),
+                canActivate: [AuthGuard],
+                title: 'Trenuci za pamcenje - Korpa'
+            },
+            {
+                path: 'mojerezervacije',     
+                loadComponent: () => import('./reservations/reservations.component').then(mod => mod.ReservationsComponent),
+                canActivate: [AuthGuard],
+                title: 'Trenuci za pamcenje - Moje rezervacije'
+            },
+            {
+                path: 'logout',
+                component: LogoutComponent
+            },
+        ]
     },
     {
         path: 'unauthorized',

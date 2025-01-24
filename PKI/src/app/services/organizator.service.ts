@@ -1,11 +1,19 @@
 import { Injectable } from "@angular/core";
 import { Promotion } from "../models/promotion.model";
 import { EventModel } from "../models/event.model";
+import { CartItem } from "../models/cartItem.model";
+import { Reservation } from "../models/reservation";
+import { User } from "../models/user.model";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class OrganizatorService {
     private promotions: Promotion[] = [];
     private events: EventModel[] = [];
+    private cartItems: CartItem[] = []; 
+    private aboutDescription = '';
+    private reservations: Reservation[] = [];
 
     constructor() {
         this.promotions = [
@@ -13,6 +21,7 @@ export class OrganizatorService {
             { id: '1', image: '18ti_rodjendan_2.jpg', title: 'Punoletstvo', description: 'Uz nas je svaki događaj za pamćenje!' },
             { id: '2', image: 'placeholder_img.jpg', title: '', description: '' }
         ];
+
         this.events = [
             { id: '0', image: 'first_birthday_2.png', title: 'Prvi rođendan', price: 10000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' },
             { id: '1', image: '18ti_rodjendan_2.jpg', title: 'Punoletstvo', price: 20000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' },
@@ -20,7 +29,9 @@ export class OrganizatorService {
             { id: '3', image: 'privatne_zurke.jpg', title: 'Privatna žurka', price: 20000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' },
             { id: '4', image: 'godisnjica.jpg', title: 'Godišnjica', price: 12000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' },
             { id: '5', image: 'happy_hour.jpg', title: 'Happy Hour', price: 5000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' }
-        ]
+        ];
+
+        this.aboutDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.';
     }
 
    getPromotions() {
@@ -85,6 +96,73 @@ export class OrganizatorService {
             return true;
         } else {
             return false;
+        }
+    }
+
+    getAboutDescription() {
+        return this.aboutDescription;
+    }
+
+    addToCart(eventId: string): boolean {
+        const event = this.getEventById(eventId);
+        if (event) {
+            const index = this.cartItems.length;
+            this.cartItems.push({ itemId: index.toString(), eventId: event.id, eventImage: event.image, eventName: event.title, eventDate: undefined, numOfGuest: '' });
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    removeCartItem(cartItemId: string): boolean {
+        this.cartItems = this.cartItems.filter(item => item.itemId !== cartItemId);
+        return true;
+    }
+
+    getCartItems() {
+        return [ ...this.cartItems ];
+    }
+
+    reserveEvent(cartItem: CartItem, user: User):boolean {
+        if (cartItem && user) {
+            const index = this.reservations.length;
+            this.reservations.push({ reservationId: index.toString(), eventImage: cartItem.eventImage, eventName: cartItem.eventName, userReserved: user.firstName + ' ' + user.lastName, date: cartItem.eventDate!.toDateString(), numOfGuest: cartItem.numOfGuest, status: 'Na čekanju'});
+            this.removeCartItem(cartItem.itemId);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    getReservations() {
+        return [ ... this.reservations ];
+    }
+
+    getReservationsOrg() {
+        let retVal: Reservation[] = [];
+        this.reservations.forEach((item) => {
+           if (item.status === 'Na čekanju') {
+            retVal.push(item);
+           }
+        });
+        return retVal;
+    }
+
+    acceptReservation(res: Reservation): boolean {
+        if (res) {
+            res.status = "Odobreno";
+            return true;
+        } else {
+            return false
+        }
+    }
+
+    declineReseration(res: Reservation): boolean {
+        if (res) {
+            res.status = "Odbijeno";
+            return true;
+        } else {
+            return false
         }
     }
 }

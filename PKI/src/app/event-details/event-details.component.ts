@@ -24,7 +24,6 @@ export class EventDetailsComponent {
 
   ngOnInit() {
     this.modifiedEvent = {...this.organizatorService.getEventById(this.eventToChange)!};
-    console.log(this.modifiedEvent.id);
     if (!this.modifiedEvent) {
       window.alert("Došlo je do greške. Molimo pokušajte ponovo.");
     }

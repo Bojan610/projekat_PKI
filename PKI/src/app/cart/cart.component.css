@@ -1,0 +1,141 @@
+.cart-wrapper {
+    padding: 3vh 8%;
+    text-align: center;
+}
+.cart-wrapper p {
+    color: #fff;
+    margin-bottom: 0;
+}
+.cart-wrapper h2 {
+    margin: 25px 0;
+    color: #fff;
+}
+.cart-wrapper .header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid #E0BE55;
+}
+.cart-wrapper .header h2 {
+    color: #fff;
+    font-family: "BenchNine", serif;
+    font-weight: 300;
+    font-size: 3em;
+}
+.cart-wrapper .cart-items {
+    padding: 0px 20px;
+}
+.cart-wrapper .cart-items .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 0;
+}
+.cart-wrapper .cart-items .item:not(:last-child) {
+    border-bottom: 1px solid #fff;
+}
+.cart-wrapper .cart-items .item .img-holder {
+    height: 180px;
+    width: 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #E0BE55;
+}
+.cart-wrapper .cart-items .item .content {
+    width: 55%;
+    text-align: left;
+}
+.cart-wrapper .cart-items .item .content .name {
+    font-weight: 500;
+}
+.cart-wrapper .cart-items .item .content form .row-holder {
+    display: flex;
+}
+.cart-wrapper .cart-items .item .content form label {
+    padding-top: 32px;
+    padding-right: 10px;
+}
+::ng-deep .cart-wrapper .cart-items .item .content form .custom-form-field .mat-mdc-text-field-wrapper {
+    background-color: transparent !important;
+}
+::ng-deep .cart-wrapper .cart-items .item .content form .mat-mdc-form-field-infix input,
+::ng-deep .cart-wrapper .cart-items .item .content form .mat-datepicker-toggle button,
+::ng-deep .cart-wrapper .cart-items .item .content form .mat-mdc-select-value,
+::ng-deep .cart-wrapper .cart-items .item .content form .custom-form-field mat-label {
+    color: #fff !important;
+}
+::ng-deep .cart-wrapper .cart-items .item .content form .mat-mdc-select-value,
+::ng-deep .cart-wrapper .cart-items .item .content form .mat-mdc-form-field-infix input {
+    padding-top: 8px;
+}
+::ng-deep .cart-wrapper .cart-items .item .content form .custom-form-field .mat-mdc-select-arrow svg {
+    fill: #fff;
+}
+
+.cart-wrapper .cart-items .item .btn-holder .my-button {
+    display: block;
+    margin: 20px 0;
+}
+.cart-wrapper .cart-items .item .btn-holder .my-button.cancel {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+.cart-wrapper .cart-items .item .btn-holder .my-button.cancel:hover {
+    background-color: #fff;
+    color: #000;
+}
+.cart-wrapper .cart-items .item .btn-holder .my-button.reserve {
+    background-color: #5FAF67;
+}
+.cart-wrapper .cart-items .item .btn-holder .my-button.reserve.active {
+    background-color: #1DBB2C;
+}
+.cart-wrapper .cart-items .item .btn-holder .my-button.reserve.active:hover {
+    background-color: #149921;
+}
+
+@media (max-width: 1200px) {
+    .cart-wrapper .header h2 {
+        font-size: 2.8em;
+    }
+}
+
+@media (max-width: 1023px) {
+    .cart-wrapper .header h2 {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 767px) {
+    .cart-wrapper {
+        padding: 3vh 5%;
+    }
+    .cart-wrapper .header h2 {
+        font-size: 2.3em;
+    }
+    .cart-wrapper .cart-items .item {
+        flex-wrap: wrap;
+        padding: 30px 0 10px;
+    }
+    .cart-wrapper .cart-items .item .img-holder {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .cart-wrapper .cart-items .item .content {
+        width: 100%;
+        text-align: center;
+    }
+    ::ng-deep .cart-wrapper .cart-items .item .content form .custom-form-field {
+        max-width: 160px;
+    }
+    .cart-wrapper .cart-items .item .btn-holder {
+        width: 100%;
+        text-align: center;
+    }
+    .cart-wrapper .cart-items .item .btn-holder .my-button {
+        display: inline-block;
+        margin: 20px 15px;
+    }
+}

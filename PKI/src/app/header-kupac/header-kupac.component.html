@@ -1,0 +1,20 @@
+<nav>
+    <div class="logo-holder">
+        <img src="pki_logo.png" alt="logo"/>
+    </div>
+    <div class="nav-bar-holder">
+        <div class="menu-toggle" id="mobile-menu" [class.active]="selected" (click)="onClick()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="nav-tabs" [class.active]="selected">
+            <li><a routerLink="home" routerLinkActive="selected">POČETNA</a></li>
+            <li><a routerLink="dogadjaji" routerLinkActive="selected">DOGAĐAJI</a></li>
+            <li><a routerLink="korpa" routerLinkActive="selected">KORPA</a></li>
+            <li><a routerLink="mojerezervacije" routerLinkActive="selected">MOJE REZERVACIJE</a></li>
+            <li><a routerLink="mojprofil" routerLinkActive="selected">MOJ PROFIL</a></li>
+            <li><a routerLink="logout" routerLinkActive="selected">ODJAVA</a></li>
+        </ul>
+    </div>
+</nav>

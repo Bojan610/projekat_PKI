@@ -95,8 +95,9 @@ h2 {
 @media (max-width: 767px) {
     h2 {
         font-size: 2.3em;
+        text-align: center;
     }
-    .event-holder .col {
+    .add-event-holder .col {
         width: 100%;
     }
 }

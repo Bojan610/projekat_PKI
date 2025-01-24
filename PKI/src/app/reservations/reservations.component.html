@@ -1,0 +1,30 @@
+<section class="reservations-wrapper sections-wrapper">
+    <div class="header">
+         <h1>Moje rezervacije</h1>
+    </div>
+    @if (reservations.length != 0) {
+      <div class="reservations">
+          <div class="reservation" *ngFor="let reservation of reservations">
+            <div class="img-holder" [style.backgroundImage]="'url(' + reservation.eventImage + ')'"></div>
+            <div class="content">
+                <p>Događaj: <span class="name">{{reservation.eventName}}</span></p>
+                <div class="infos">
+                    <div class="col">
+                        <p>Datum: <span class="name">{{reservation.date}}</span></p>
+                        <p>Broj Gostiju: <span class="name">{{reservation.numOfGuest}}</span></p>
+                    </div>
+                    <div class="col">
+                        <p class="res">Status rezervacije:</p>
+                        <p class="res" [class.approved]="reservation.status == 'Odobreno'" [class.denied]="reservation.status == 'Odbijeno'"><span class="name">{{reservation.status}}</span></p>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    } @else {
+      <h2>Trenutno ne postoji ni jedna rezervacija!</h2>
+    }
+     
+ </section>
+ 
+ 

@@ -1,2 +1,30 @@
-<p>homepage-kupac works!</p>
-<p>{{userFromPath?.userName}}</p>
+<section class="homepage-wrapper sections-wrapper">
+   
+    <div class="slideshow">
+        <!-- Left Arrow -->
+        <button class="carousel-control-prev controls" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" (click)="previousSlide()">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <div [style.transform]="'translateX(-' + currentIndex * 100 + '%)'" class="wrapper">
+            <div *ngFor="let promotion of promotions" [style.--bg-image]="'url(' + promotion.image + ')'" class="content">                  
+               <div class="text-holder">                         
+                    <h1>{{promotion.title}}</h1>
+                    <h2>{{promotion.description}}</h2>     
+                </div>
+            </div>
+        </div>
+       <!-- Right Arrow -->
+        <button class="carousel-control-next controls" type="button" data-bs-target="#carouselExample" data-bs-slide="next" (click)="nextSlide()">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        <div class="dots">
+            <ul>
+                <li *ngFor="let promotion of promotions" [class.active]="promotion.id === currentIndex.toString()" (click)="onSelectSlide(promotion.id)"></li>
+            </ul>
+        </div>
+    </div>
+
+</section>
+

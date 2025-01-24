@@ -18,6 +18,13 @@ app-header {
     z-index: 1;
 }
 
+app-header-kupac {
+    height: 140px;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
 body .sections-wrapper {
     height: auto;
     min-height: calc(100vh - 140px);
@@ -100,4 +107,3 @@ form .control-error {
         font-size: 2.4em;
     }
 }
-  

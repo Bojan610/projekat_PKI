@@ -1,0 +1,49 @@
+<section class="cart-wrapper sections-wrapper">
+    <div class="header">
+         <h1>Korpa</h1>
+    </div>
+    @if (cartItems.length != 0) {
+      <div class="cart-items">
+          <div class="item" *ngFor="let item of cartItems">
+            <div class="img-holder" [style.backgroundImage]="'url(' + item.eventImage + ')'"></div>
+            <div class="content">
+                  <p>Događaj: <span class="name">{{item.eventName}}</span></p>
+                  <form>
+                    <!-- Date Picker -->
+                    <div class="row-holder">
+                      <label for="date">Izaberite datum:</label>
+                      <mat-form-field class="custom-form-field" appearance="fill">
+                        <mat-label>mm/dd/yyyy</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="item.eventDate" name="date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  
+                    <!-- Dropdown -->
+                    <div class="row-holder row-2">
+                      <label for="dropdown">Izaberite broj gostiju:</label>
+                      <mat-form-field class="custom-form-field" appearance="fill">
+                        <mat-label>Izaberite opciju</mat-label>
+                        <mat-select [(ngModel)]="item.numOfGuest" name="dropdown">
+                          <mat-option *ngFor="let option of options" [value]="option.value">
+                            {{ option.viewValue }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </form>
+            </div>
+              <div class="btn-holder">
+                  <button class="my-button reserve" (click)="reserveEvent(item)" [class.active]="item.eventDate && item.numOfGuest">Rezerviši</button>
+                  <button class="my-button cancel" (click)="removeEvent(item.itemId)">Odustani</button>
+              </div>
+          </div>
+      </div>
+    } @else {
+      <h2>Trenutno nema događaja u korpi!</h2>
+    }
+     
+ </section>
+ 
+ 

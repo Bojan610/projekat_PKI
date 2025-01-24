@@ -1,0 +1,112 @@
+.homepage-wrapper h1 {
+    font-family: "Beau Rivage", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 4.5em;
+    color: #fff;
+}
+.homepage-wrapper h2 {
+    font-family: "BenchNine", serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 2.3em;
+    color: #fff;
+}
+.homepage-wrapper .slideshow {
+    position: relative;
+    width: 70%;
+    margin: auto;
+    overflow: hidden;
+    padding-top: 7vh;
+}
+.homepage-wrapper .slideshow .controls {
+    width: 8% !important;
+}
+.homepage-wrapper .slideshow .controls:focus {
+    opacity: 0.5;
+}
+.homepage-wrapper .slideshow .controls:focus:hover {
+    opacity: 1;
+}
+.homepage-wrapper .slideshow .wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+.homepage-wrapper .slideshow .content {
+    min-width: 100%;
+    height: 60vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), var(--bg-image); 
+}
+.homepage-wrapper .slideshow .content .text-holder {
+    position: relative; /* Ensure the text stays above the background */
+    z-index: 1; /* Ensure text is on top */  
+}
+.homepage-wrapper .slideshow .dots {
+    width: 50%;
+    margin: auto;
+}
+.homepage-wrapper .slideshow .dots ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    margin: 0;
+}
+.homepage-wrapper .slideshow .dots ul li {
+    background-color: transparent;
+    border: 1px solid #fff;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin: 0 10px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.homepage-wrapper .slideshow .dots ul li.active,
+.homepage-wrapper .slideshow .dots ul li:hover {
+    background-color: #fff;
+}
+
+.homepage-wrapper h1 {
+    font-family: "Beau Rivage", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 4.5em;
+}
+
+@media (max-width: 1200px) {
+    .homepage-wrapper h1 {
+        font-size: 4em;
+    }
+    .homepage-wrapper h2 {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 1023px) {
+    .homepage-wrapper h1 {
+        font-size: 3.5em;
+    }
+    .homepage-wrapper h2 {
+        font-size: 1.7em;
+    }
+}
+
+@media (max-width: 767px) {
+    .homepage-wrapper h1 {
+        font-size: 3em;
+    }
+    .homepage-wrapper h2 {
+        font-size: 1.5em;
+    }
+    .homepage-wrapper .slideshow {
+        width: 90%;
+    }
+}

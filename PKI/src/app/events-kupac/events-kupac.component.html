@@ -1,0 +1,47 @@
+<section class="events-wrapper sections-wrapper">
+
+    <div *ngIf="!eventToOpen">
+        <div class="events">
+            <div class="event" *ngFor="let event of events | paginate: { itemsPerPage: 3, currentPage: currentPage }" (click)="onEventReview(event.id)" [class.clicked]="eventReview[+event.id]">
+                @if (!eventReview[+event.id]) {
+                    <div class="img-holder" [style.backgroundImage]="'url(' + event.image + ')'"></div>
+                    <h2>{{ event.title }}</h2>
+                    <div class="price-holder">
+                        <p>Cena:</p>
+                        <p>od <span class="price">{{event.price}}</span> RSD</p>
+                    </div>   
+                } @else {
+                    <div class="description">
+                        <div class="text-holder">
+                            {{event.description}}
+                        </div>
+                        <div class="btn-holder">
+                            <button class="my-button read-more" (click)="openEvent(event.id)">Pročitaj više</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        <div class="pagination">
+            <button 
+            (click)="changePage(currentPage - 1)" 
+            [disabled]="currentPage === 1">
+            &larr; Prethodna
+            </button>
+        
+            <span>Strana {{ currentPage }} of {{ totalPages }}</span>
+        
+            <button 
+            (click)="changePage(currentPage + 1)" 
+            [disabled]="currentPage === totalPages">
+            Sledeća &rarr;
+            </button>
+        </div>
+    </div>
+
+    <app-event-details-kupac *ngIf="eventToOpen" (close)="closeEvent()" [eventToOpen]="eventToOpen"/>
+       
+ </section>
+ 
+ 

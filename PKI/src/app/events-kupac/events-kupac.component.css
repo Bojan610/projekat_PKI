@@ -15,6 +15,16 @@
     border-radius: 10px;
     text-align: center;
     background-color: #fff;
+    padding-bottom: 15px;
+    transition: transform 1s;
+}
+.event:hover {
+    cursor: pointer;
+}
+.event.clicked {
+    background-color: #D3C494;
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
 }
 .event .img-holder {
     height: 45vh;
@@ -40,49 +50,33 @@
     margin: 0;
     font-size: 1em;
 }
-.event .btn-holder {
-    margin: 20px 0;
+.event .description {
+    height: 57vh;
+    min-height: 400px;
+    max-height: 660px;
+    padding: 15px 10px 0 10px;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-.event .btn-holder .my-button {
-    margin: 0 5px;
+.event .description .text-holder {
+    text-align: left;
+    max-height: 80%;
+    overflow: hidden;
 }
-.event .btn-holder .my-button.change {
-    background-color: #E0BE55;
+.event .description .btn-holder .read-more {
+   background-color: transparent;
 }
-.event .btn-holder .my-button.change:hover {
-    background-color: #D3C494;
-}
-.event .btn-holder .my-button.delete {
-    background-color: #F11717;
-    color: #fff;
-}
-.event .btn-holder .my-button.delete:hover {
-    background-color: #d81111;
-}
-
-.add-event-btn-holder {
-    width: 100%;
-    max-width: 1500px;
-    text-align: right;
-    margin: 40px auto;
-    padding: 0 30px;
-}
-.add-event-btn-holder .add-event {
-    background-color: transparent;
-    border: 2px solid #fff;
-    color: #fff;
-}
-.add-event-btn-holder .add-event:hover {
+.event .description .btn-holder .read-more:hover {
     background-color: #fff;
-    border-color: #000;
-    color: #000;
 }
 
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 50px;
     padding-bottom: 40px;
 }
 .pagination button {
@@ -116,9 +110,6 @@
     .event {
         width: 90%;
         margin: 20px 0;
-    }
-    .add-event-btn-holder {
-        margin: 10px auto 40px auto;
     }
 }
   
