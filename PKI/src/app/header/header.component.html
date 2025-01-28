@@ -9,11 +9,11 @@
             <span class="bar"></span>
         </div>
         <ul class="nav-tabs" [class.active]="selected">
-            <li><a routerLink="home" routerLinkActive="selected">POČETNA</a></li>
-            <li><a routerLink="dogadjaji" routerLinkActive="selected">DOGAĐAJI</a></li>
-            <li><a routerLink="rezervacije" routerLinkActive="selected">REZERVACIJE</a></li>
-            <li><a routerLink="mojprofil" routerLinkActive="selected">MOJ PROFIL</a></li>
-            <li><a routerLink="logout" routerLinkActive="selected">ODJAVA</a></li>
+            <li (click)="onClick()"><a routerLink="home" routerLinkActive="selected">POČETNA</a></li>
+            <li (click)="onClick()"><a routerLink="dogadjaji" routerLinkActive="selected">DOGAĐAJI</a></li>
+            <li (click)="onClick()"><a routerLink="rezervacije" routerLinkActive="selected">REZERVACIJE</a></li>
+            <li (click)="onClick()"><a routerLink="mojprofil" routerLinkActive="selected">MOJ PROFIL</a></li>
+            <li (click)="onClick()"><a routerLink="logout" routerLinkActive="selected">ODJAVA</a></li>
         </ul>
     </div>
 </nav>

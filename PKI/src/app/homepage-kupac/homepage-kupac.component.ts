@@ -20,7 +20,7 @@ export class HomepageKupacComponent {
     }
   
     ngOnInit(): void {
-      this.startInterval();
+      //this.startInterval();
     }
   
     startInterval() {

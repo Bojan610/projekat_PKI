@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { LogInService } from '../services/login.service';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-cart',
@@ -40,6 +41,7 @@ export class CartComponent {
   reserveEvent(cartItem: CartItem) {
     if (cartItem.eventDate && cartItem.numOfGuest) {
       const user = this.logInService.getUser(sessionStorage.getItem('user')!);
+      cartItem.eventDate = format(cartItem.eventDate, 'dd.MM.yyyy');
       if (this.organizatorService.reserveEvent(cartItem, user)) {
         this.cartItems = this.organizatorService.getCartItems();
         window.alert("Događaj uspešno rezervisan!");

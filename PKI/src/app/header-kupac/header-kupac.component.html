@@ -3,18 +3,72 @@
         <img src="pki_logo.png" alt="logo"/>
     </div>
     <div class="nav-bar-holder">
+        <div class="d-block d-md-none">
+            <button class="bell" (click)="openCloseNotifications()" [class.active]="notificationsOpenClose">
+                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" class="bi bi-bell-fill" viewBox="0 0 16 16"><path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
+                </svg>
+                <p *ngIf="unreadNotifications.length != 0" class="marker">{{unreadNotifications.length}}</p>
+            </button>
+            <div class="notification-holder" [class.show]="notificationsOpenClose">
+                <p class="title">Obaveštenja</p>
+                <div class="content">
+                    @if (notifications.length != 0) {
+                        <div class="item" *ngFor="let notification of notifications">
+                            <div class="row-1">
+                                <i class="bi bi-person-circle person-img" [class.read]="notification.read"></i>                           
+                                <p class="description"><span class="bold">{{notification.user}}</span> {{notification.description}} - <span class="bold">{{notification.eventName}}</span></p>                                                    
+                                <i *ngIf="!notification.read" class="dot"></i>
+                            </div>
+                            <div class="row-2">
+                                <p class="date">{{notification.date}}</p>
+                                <button class="my-button read-btn" (click)="read(notification)"><i class="bi bi-check2"></i> Pročitano</button>
+                            </div>
+                        </div>
+                    } @else {
+                        <p class="empty-content">Nema pristiglih obaveštenja!</p>
+                    }
+                </div>
+            </div>
+        </div>
         <div class="menu-toggle" id="mobile-menu" [class.active]="selected" (click)="onClick()">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
         <ul class="nav-tabs" [class.active]="selected">
-            <li><a routerLink="home" routerLinkActive="selected">POČETNA</a></li>
-            <li><a routerLink="dogadjaji" routerLinkActive="selected">DOGAĐAJI</a></li>
-            <li><a routerLink="korpa" routerLinkActive="selected">KORPA</a></li>
-            <li><a routerLink="mojerezervacije" routerLinkActive="selected">MOJE REZERVACIJE</a></li>
-            <li><a routerLink="mojprofil" routerLinkActive="selected">MOJ PROFIL</a></li>
-            <li><a routerLink="logout" routerLinkActive="selected">ODJAVA</a></li>
+            <li (click)="onClick()"><a routerLink="home" routerLinkActive="selected">POČETNA</a></li>
+            <li (click)="onClick()"><a routerLink="dogadjaji" routerLinkActive="selected">DOGAĐAJI</a></li>
+            <li (click)="onClick()"><a routerLink="korpa" routerLinkActive="selected">KORPA</a></li>
+            <li (click)="onClick()"><a routerLink="mojerezervacije" routerLinkActive="selected">MOJE REZERVACIJE</a></li>
+            <li (click)="onClick()"><a routerLink="mojprofil" routerLinkActive="selected">MOJ PROFIL</a></li>
+            <li (click)="onClick()"><a routerLink="logout" routerLinkActive="selected">ODJAVA</a></li>
+            <li class="d-none d-md-block">
+                <button class="bell" (click)="openCloseNotifications()" [class.active]="notificationsOpenClose">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" class="bi bi-bell-fill" viewBox="0 0 16 16"><path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
+                    </svg>
+                    <p *ngIf="unreadNotifications.length != 0" class="marker">{{unreadNotifications.length}}</p>
+                </button>
+                <div class="notification-holder" [class.show]="notificationsOpenClose">
+                    <p class="title">Obaveštenja</p>
+                    <div class="content">
+                        @if (notifications.length != 0) {
+                            <div class="item" *ngFor="let notification of notifications">
+                                <div class="row-1">
+                                    <i class="bi bi-person-circle person-img" [class.read]="notification.read"></i>                           
+                                    <p class="description"><span class="bold">{{notification.user}}</span> {{notification.description}} - <span class="bold">{{notification.eventName}}</span></p>                                                    
+                                    <i *ngIf="!notification.read" class="dot"></i>
+                                </div>
+                                <div class="row-2">
+                                    <p class="date">{{notification.date}}</p>
+                                    <button class="my-button read-btn" (click)="read(notification)"><i class="bi bi-check2"></i> Pročitano</button>
+                                </div>
+                            </div>
+                        } @else {
+                            <p class="empty-content">Nema pristiglih obaveštenja!</p>
+                        }
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>

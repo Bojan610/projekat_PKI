@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { EventModel } from '../models/event.model';
 import { OrganizatorService } from '../services/organizator.service';
 import { NgFor, NgIf } from '@angular/common';
@@ -16,8 +16,11 @@ export class EventDetailsKupacComponent {
   @Output() close = new EventEmitter<void>();
   event?: EventModel;
   showAboutUs: boolean = false;
+  currentIndex = 0;
+  slidesPerView = 3; // Default for desktop
   stars = [1, 2, 3, 4, 5]; // Array for 5 stars
   rating = 0; // Selected rating
+  reviewLeft: boolean = false;
 
   constructor(private organizatorService: OrganizatorService) { }
 
@@ -31,7 +34,21 @@ export class EventDetailsKupacComponent {
     this.event = {...this.organizatorService.getEventById(this.eventToOpen)!};
     if (!this.event) {
       window.alert("Došlo je do greške. Molimo pokušajte ponovo.");
+    } else {
+      this.updateSlidesPerView();
+      const user = sessionStorage.getItem('user');
+      for (const review of this.event.reviews) {
+        if (review.user === user) {
+            this.reviewLeft = true;
+            break;
+        }
+      }
     }
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.updateSlidesPerView();
   }
 
   addToCart() {
@@ -54,12 +71,44 @@ export class EventDetailsKupacComponent {
     this.showAboutUs = false;
   }
 
+  updateSlidesPerView() {
+    this.slidesPerView = window.innerWidth < 768 ? 1 : 3;
+  }
+
+  getTransformStyle() {
+    return `translateX(-${this.currentIndex * (100 / this.slidesPerView)}%)`;
+  }
+
+  getWrapperWidth() {
+    return `${(this.event!.reviews.length / this.slidesPerView) * 100}%`;
+  }
+
+  nextSlide() {
+    if (this.currentIndex < this.event!.reviews.length - this.slidesPerView) {
+      this.currentIndex++;
+    }
+  }
+
+  prevSlide() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    }
+  }
+
   setRating(value: number): void {
     this.rating = value; // Set the rating when a star is clicked
   }
   
-  onSubmitComment() {
-    console.log(this.form.value.description);
+  onSubmitReview() {
+    if (this.rating && this.form.valid) {
+      const index = this.event?.reviews.length;
+      const user = sessionStorage.getItem('user');
+      if (this.organizatorService.leaveReview(this.event!.id, { reviewId: index!.toString(), user: user!, rating: this.rating, comment: this.form.value.description!})) {
+        this.reviewLeft = true;
+      } else {
+        window.alert("Greška prilikom ostavljanja komentara. Pokušajte ponovo.");
+      }
+    }
   }
 
 }

@@ -31,7 +31,7 @@ export class AddEventComponent {
 
   ngOnInit() {
     const index = this.organizatorService.getNextEventId();
-    this.eventToAdd = { id: index, title: '', price: 0, description: '', image: 'placeholder_img.jpg'};
+    this.eventToAdd = { id: index, title: '', price: 0, description: '', image: 'placeholder_img.jpg', reviews: [] };
   }
 
   selectImage(): void {

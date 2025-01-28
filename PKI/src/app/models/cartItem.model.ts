@@ -3,6 +3,6 @@ export interface CartItem {
     eventId: string,
     eventImage: string,
     eventName: string, 
-    eventDate?: Date, 
+    eventDate?: string, 
     numOfGuest: string
 }

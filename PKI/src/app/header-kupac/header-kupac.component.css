@@ -48,6 +48,110 @@ nav .nav-tabs {
     cursor: pointer;
 }
 
+.bell {
+    background-color: transparent;
+    border: none;
+    padding: 10px 15px;
+}
+.bell svg {
+    fill: #fff;
+    transition: fill ease-in-out 0.3s;
+}
+.bell svg:hover,
+.bell.active svg {
+    fill: #E0BE55;
+}
+.bell .marker {
+    background-color: #F11717;
+    margin: 0;
+    border-radius: 50%;
+    font-size: 0.9em;
+    color: #fff;
+    position: relative;
+    top: -12px;
+    left: 13px;
+}
+.notification-holder {
+    position: absolute;
+    top: 100%;
+    right: 30px;
+    width: 400px;
+    background-color: white;
+    padding: 8px 20px;
+    margin: 0;
+    border-radius: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.notification-holder.show {
+    opacity: 1;
+    visibility: visible;
+}
+.notification-holder .title {
+    font-size: 1.6em;
+    font-weight: 600;
+    margin: 0;
+    border-bottom: 2px solid #E0BE55;
+}
+.notification-holder .content {
+    text-align: center;
+}
+.notification-holder .content .empty-content {
+    padding-top: 15px;
+}
+.notification-holder .content .item {
+    border-bottom: 1px solid #D9D9D9;
+    padding: 10px 0 5px;
+}
+.notification-holder .content .item .row-1 {
+    display: flex;
+    align-items: center;
+}
+.notification-holder .content .item .person-img {
+    font-size: 2em;
+    padding: 0 10px;
+    border-left: 4px solid #E0BE55;
+}
+.notification-holder .content .item .person-img.read {
+    border-left-color: #fff;
+}
+.notification-holder .content .item .description {
+    margin: 0 5px;
+    text-align: left;
+}
+.notification-holder .content .item .description .bold {
+    font-weight: 600;
+}
+.notification-holder .content .item .dot {
+    width: 15px;
+    height: 10px;
+    background-color: #E0BE55;
+    border-radius: 50%;
+}
+.notification-holder .content .item .row-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 60px;
+}
+.notification-holder .content .item .date {
+    margin: 0;
+    font-size: 1.1em;
+}
+.notification-holder .content .item .read-btn {
+    background-color: #fff;
+    font-size: 1.2em;
+    padding: 1px 20px 2px 15px;
+}
+.notification-holder .content .item .read-btn:hover {
+    background-color: #D9D9D9;
+}
+.notification-holder .content .item .read-btn i {
+    padding-right: 5px;
+    position: relative;
+    top: 3px;
+}
 /* Mobile Menu */
 .menu-toggle {
     display: none; /* Hidden on desktop */
@@ -63,18 +167,38 @@ nav .nav-tabs {
     transition: 0.3s;
 }
 
+@media (max-width: 991px) {
+    .nav-tabs a {
+        font-size: 1.1em;
+        padding: 10px 10px;
+    }
+    .logo-holder img {
+        max-width: 110px;
+    }
+}
+
 @media (max-width: 767px) {
+    nav {
+        padding: 0 10px;
+    }
+    .logo-holder img {
+        max-width: 95px;
+    }
     .nav-bar-holder {
         background: transparent;
-        padding: 10px 50px;
+        padding: 0 25px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
     }
     nav .nav-tabs {
         flex-direction: column;
         width: 100%;
         position: absolute;
-        top: 50px;
+        top: 65px;
         left: 0;
-        background: linear-gradient( rgba(37, 47, 60, 0.9), rgba(37, 47, 60, 0.9));
+        background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
         visibility: hidden;
         transition: all 0.5s ease-in-out; /* Animation for menu appearance */
         opacity: 0;                /* Start menu hidden */
@@ -90,7 +214,8 @@ nav .nav-tabs {
         text-align: center;
     }
     .menu-toggle {
-        display: block;
+        display: inline-block;
+        margin-left: 15px;
     }
     /* Animation for active state (when the menu is opened) */
     .menu-toggle.active .bar:nth-child(1) {
@@ -102,5 +227,11 @@ nav .nav-tabs {
     .menu-toggle.active .bar:nth-child(3) {
         transform: rotate(-45deg) translate(6px, -7px);
     }
-
+    .menu-toggle.active .bar {
+        background-color: #E0BE55;
+    }
+    .notification-holder {
+        right: 5px;
+        top: 70px;
+    }
 }

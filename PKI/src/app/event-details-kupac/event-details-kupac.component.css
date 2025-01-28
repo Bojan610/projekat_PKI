@@ -110,6 +110,74 @@ h2 {
     color: #fff;
     font-weight: 400;
 }
+
+/* reviews-slideshow.component.css */
+.slideshow-container {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .reviews-wrapper {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    width: 100%; /* Adjust based on total reviews */
+  }
+  
+  .review-card {
+    flex: 0 0 calc(100% / 3); /* 3 reviews per slide for desktop */
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 10px; /* Optional gap between cards */
+  }
+  
+  .review-card p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .nav-button.prev {
+    left: 10px;
+  }
+  
+  .nav-button.next {
+    right: 10px;
+  }
+  
+  .nav-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 768px) {
+    .review-card {
+      flex: 0 0 100%; /* Show 1 review per slide on mobile */
+    }
+  }
+  
+  
 .reviews form {
     width: 90%;
     max-width: 600px;
@@ -119,7 +187,7 @@ h2 {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin: 25px 0 15px;
+    margin: 25px 0 40px;
 }
 .reviews form .star {
     cursor: pointer;
@@ -137,6 +205,13 @@ h2 {
 }
 .reviews form textarea:focus {
     border-top: 5px solid #fff;
+}
+.reviews form .form-btn-holder .save {
+    background-color: #5FAF67;
+    margin: 10px 0;
+}
+.reviews form .form-btn-holder .save.enabled {
+    background-color: #1DBB2C;
 }
 
 @media (max-width: 1200px) {
@@ -170,5 +245,8 @@ h2 {
     }
     .event-holder .col.col-2 .price-and-buttons {
         bottom: 0;
+    }
+    .slide {
+        grid-template-columns: 1fr;
     }
 }

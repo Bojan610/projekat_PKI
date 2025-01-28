@@ -4,6 +4,9 @@ import { EventModel } from "../models/event.model";
 import { CartItem } from "../models/cartItem.model";
 import { Reservation } from "../models/reservation";
 import { User } from "../models/user.model";
+import { Review } from "../models/review.model";
+import { Notification } from "../models/notification.model";
+import { format } from "date-fns";
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +17,7 @@ export class OrganizatorService {
     private cartItems: CartItem[] = []; 
     private aboutDescription = '';
     private reservations: Reservation[] = [];
+    private notifications: Notification[] = [];
 
     constructor() {
         this.promotions = [
@@ -23,16 +27,31 @@ export class OrganizatorService {
         ];
 
         this.events = [
-            { id: '0', image: 'first_birthday_2.png', title: 'Prvi rođendan', price: 10000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' },
-            { id: '1', image: '18ti_rodjendan_2.jpg', title: 'Punoletstvo', price: 20000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' },
-            { id: '2', image: 'vencanja_2.jpg', title: 'Venčanje', price: 100000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' },
-            { id: '3', image: 'privatne_zurke.jpg', title: 'Privatna žurka', price: 20000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' },
-            { id: '4', image: 'godisnjica.jpg', title: 'Godišnjica', price: 12000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' },
-            { id: '5', image: 'happy_hour.jpg', title: 'Happy Hour', price: 5000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.' }
+            { id: '0', image: 'first_birthday_2.png', title: 'Prvi rođendan', price: 10000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.', reviews: [
+                {
+                    reviewId: '0', user: 'pera', rating: 4, comment: 'Proin mauris felis, interdum id tortor vel, feugiat dictum velit. Fusce commodo mi dolor, eget malesuada urna faucibus sed. Nullam tincidunt convallis porta. Sed facilisis ullamcorper dapibus.'
+                },
+                {
+                    reviewId: '0', user: 'mika', rating: 5, comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada.'
+                },
+                {
+                    reviewId: '0', user: 'zika', rating: 5, comment: 'Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.'
+                }   
+                ] 
+            },
+            { id: '1', image: '18ti_rodjendan_2.jpg', title: 'Punoletstvo', price: 20000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.', reviews: [] },
+            { id: '2', image: 'vencanja_2.jpg', title: 'Venčanje', price: 100000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.', reviews: [] },
+            { id: '3', image: 'privatne_zurke.jpg', title: 'Privatna žurka', price: 20000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.', reviews: [] },
+            { id: '4', image: 'godisnjica.jpg', title: 'Godišnjica', price: 12000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.', reviews: [] },
+            { id: '5', image: 'happy_hour.jpg', title: 'Happy Hour', price: 5000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.', reviews: [] }
         ];
 
         this.aboutDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.';
     }
+
+   getNotofications() {
+    return this.notifications;
+   }
 
    getPromotions() {
     return [...this.promotions];
@@ -99,6 +118,16 @@ export class OrganizatorService {
         }
     }
 
+    leaveReview(eventId:string, review: Review):boolean {
+        const event = this.getEventById(eventId);
+        if (event && review) {
+            event.reviews.push(review);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     getAboutDescription() {
         return this.aboutDescription;
     }
@@ -126,7 +155,7 @@ export class OrganizatorService {
     reserveEvent(cartItem: CartItem, user: User):boolean {
         if (cartItem && user) {
             const index = this.reservations.length;
-            this.reservations.push({ reservationId: index.toString(), eventImage: cartItem.eventImage, eventName: cartItem.eventName, userReserved: user.firstName + ' ' + user.lastName, date: cartItem.eventDate!.toDateString(), numOfGuest: cartItem.numOfGuest, status: 'Na čekanju'});
+            this.reservations.push({ reservationId: index.toString(), eventImage: cartItem.eventImage, eventName: cartItem.eventName, userReserved: user.firstName + ' ' + user.lastName, date: cartItem.eventDate!, numOfGuest: cartItem.numOfGuest, status: 'Na čekanju'});
             this.removeCartItem(cartItem.itemId);
             return true;
         } else {
@@ -148,18 +177,22 @@ export class OrganizatorService {
         return retVal;
     }
 
-    acceptReservation(res: Reservation): boolean {
-        if (res) {
+    acceptReservation(user: User, res: Reservation): boolean {
+        if (res && user) {
             res.status = "Odobreno";
+            const index = this.notifications.length;
+            this.notifications.push({ id: index!.toString(), user: user.firstName + ' ' + user.lastName, eventName: res.eventName, description: 'je prihvatio vašu rezervaciju za dogadjaj', date: format(new Date(), 'dd.MM.yyyy') + ' ⦁ ' + format(new Date(), 'HH:mm'), read: false });
             return true;
         } else {
             return false
         }
     }
 
-    declineReseration(res: Reservation): boolean {
-        if (res) {
+    declineReseration(user:User, res: Reservation): boolean {
+        if (res && user) {
             res.status = "Odbijeno";
+            const index = this.notifications.length;
+            this.notifications.push({ id: index!.toString(), user: user.firstName + ' ' + user.lastName, eventName: res.eventName, description: 'je odbio vašu rezervaciju za dogadjaj', date: format(new Date(), 'dd.MM.yyyy') + ' ⦁ ' + format(new Date(), 'HH:mm'), read: false });
             return true;
         } else {
             return false

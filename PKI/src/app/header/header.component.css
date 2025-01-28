@@ -63,18 +63,37 @@ nav .nav-tabs {
     transition: 0.3s;
 }
 
+@media (max-width: 991px) {
+    .nav-tabs a {
+        font-size: 1.1em;
+    }
+    .logo-holder img {
+        max-width: 110px;
+    }
+}
+
 @media (max-width: 767px) {
+    nav {
+        padding: 0 10px;
+    }
+    .logo-holder img {
+        max-width: 95px;
+    }
     .nav-bar-holder {
         background: transparent;
-        padding: 10px 50px;
+        padding: 0 25px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
     }
     nav .nav-tabs {
         flex-direction: column;
         width: 100%;
         position: absolute;
-        top: 50px;
+        top: 65px;
         left: 0;
-        background: linear-gradient( rgba(37, 47, 60, 0.9), rgba(37, 47, 60, 0.9));
+        background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
         visibility: hidden;
         transition: all 0.5s ease-in-out; /* Animation for menu appearance */
         opacity: 0;                /* Start menu hidden */
@@ -102,5 +121,11 @@ nav .nav-tabs {
     .menu-toggle.active .bar:nth-child(3) {
         transform: rotate(-45deg) translate(6px, -7px);
     }
-
+    .menu-toggle.active .bar {
+        background-color: #E0BE55;
+    }
+    .notification-holder {
+        right: 5px;
+        top: 70px;
+    }
 }
