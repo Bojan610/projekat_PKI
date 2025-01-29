@@ -29,13 +29,16 @@ export class OrganizatorService {
         this.events = [
             { id: '0', image: 'first_birthday_2.png', title: 'Prvi rođendan', price: 10000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.', reviews: [
                 {
-                    reviewId: '0', user: 'pera', rating: 4, comment: 'Proin mauris felis, interdum id tortor vel, feugiat dictum velit. Fusce commodo mi dolor, eget malesuada urna faucibus sed. Nullam tincidunt convallis porta. Sed facilisis ullamcorper dapibus.'
+                    reviewId: '0', user: 'Pera P.', username: 'pera', rating: 4, comment: 'Proin mauris felis, interdum id tortor vel, feugiat dictum velit. Fusce commodo mi dolor, eget malesuada urna faucibus sed. Nullam tincidunt convallis porta. Sed facilisis ullamcorper dapibus.'
                 },
                 {
-                    reviewId: '0', user: 'mika', rating: 5, comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada.'
+                    reviewId: '1', user: 'Zika Z.', username: 'zika', rating: 5, comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada.'
                 },
                 {
-                    reviewId: '0', user: 'zika', rating: 5, comment: 'Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.'
+                    reviewId: '2', user: 'Steva S.', username: 'steva', rating: 5, comment: 'Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.'
+                },
+                {
+                    reviewId: '2', user: 'Bojan B.', username: 'steva', rating: 5, comment: 'Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla.'
                 }   
                 ] 
             },

@@ -110,73 +110,71 @@ h2 {
     color: #fff;
     font-weight: 400;
 }
-
-/* reviews-slideshow.component.css */
-.slideshow-container {
-    position: relative;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  
-  .reviews-wrapper {
+.reviews .slideshow-container {
     display: flex;
-    transition: transform 0.3s ease-in-out;
-    width: 100%; /* Adjust based on total reviews */
-  }
-  
-  .review-card {
-    flex: 0 0 calc(100% / 3); /* 3 reviews per slide for desktop */
-    background: #f9f9f9;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin: 0 10px; /* Optional gap between cards */
-  }
-  
-  .review-card p {
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  .nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
     align-items: center;
-  }
-  
-  .nav-button.prev {
-    left: 10px;
-  }
-  
-  .nav-button.next {
-    right: 10px;
-  }
-  
-  .nav-button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-  }
-  
-  @media (max-width: 768px) {
-    .review-card {
-      flex: 0 0 100%; /* Show 1 review per slide on mobile */
-    }
-  }
-  
+    justify-content: space-between;
+    width: 95%;
+    max-width: 1500px;
+    margin: 40px auto;
+}
+.reviews .slideshow-container p {
+    margin: 0;
+}
+.reviews .slideshow-container .slideshow {
+    overflow: hidden;
+    margin: 0 20px;
+    width: 100%;
+}
+.reviews .slideshow .wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+.reviews .slideshow .wrapper .content {
+    min-width: calc(100% / 3);
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center; 
+    padding: 0 15px;
+}
+.reviews .slideshow .content .review {
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    border-top: 4px solid #E0BE55;
+    padding: 10px 5px 10px 15px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.reviews .slideshow .review .reviewer {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+.reviews .slideshow .review .reviewer i {
+    font-size: 2.5em;
+    margin-right: 15px;
+}
+.reviews .slideshow .review .reviewer .star {
+    margin-right: 5px;
+    fill: #E0BE55;
+}
+.reviews .slideshow-container .arrow {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #fff;
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+}
+.reviews .slideshow-container .arrow:hover {
+    opacity: 1;
+} 
   
 .reviews form {
     width: 90%;
@@ -224,6 +222,9 @@ h2 {
     h2 {
         font-size: 2.5em;
     }
+    .reviews .slideshow-container .slideshow {
+        margin: 0;
+    }
 }
 
 @media (max-width: 767px) {
@@ -246,7 +247,7 @@ h2 {
     .event-holder .col.col-2 .price-and-buttons {
         bottom: 0;
     }
-    .slide {
-        grid-template-columns: 1fr;
+    .reviews .slideshow .wrapper .content {
+        min-width: 100%;     
     }
 }
