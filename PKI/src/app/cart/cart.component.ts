@@ -54,6 +54,7 @@ export class CartComponent {
   removeEvent(cartItemId: string) {
     if (this.organizatorService.removeCartItem(cartItemId)) {
       this.cartItems = this.organizatorService.getCartItems();
+      window.alert("Događaj uspešno obrisan iz korpe!");
     } else {
       window.alert("Greška prilikom brisanja događaja iz korpe. Pokušajte ponovo.")
     }

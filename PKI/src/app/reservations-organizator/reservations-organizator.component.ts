@@ -20,20 +20,26 @@ export class ReservationsOrganizatorComponent {
   }
 
   acceptReservation(reservation: Reservation) {
-    const user = this.logInService.getUser(sessionStorage.getItem('user')!);
-    if (this.organizatorService.acceptReservation(user, reservation)) {
-      this.reservations = this.organizatorService.getReservationsOrg();
-    } else {
-      window.alert("Greška prilikom odbijanja događaja. Pokušajte ponovo.")
+    let answer = window.confirm("Da li zaista želite da prihvatite ovu rezervaciju?");
+    if (answer) {
+      const user = this.logInService.getUser(sessionStorage.getItem('user')!);
+      if (this.organizatorService.acceptReservation(user, reservation)) {
+        this.reservations = this.organizatorService.getReservationsOrg();
+      } else {
+        window.alert("Greška prilikom odbijanja događaja. Pokušajte ponovo.")
+      }
     }
   }
 
   declineReservation(reservation: Reservation) {
-    const user = this.logInService.getUser(sessionStorage.getItem('user')!);
-    if (this.organizatorService.declineReseration(user, reservation)) {
-      this.reservations = this.organizatorService.getReservationsOrg();
-    } else {
-      window.alert("Greška prilikom odbijanja događaja. Pokušajte ponovo.")
+    let answer = window.confirm("Da li zaista želite da odbijete ovu rezervaciju ?");
+    if (answer) {
+      const user = this.logInService.getUser(sessionStorage.getItem('user')!);
+      if (this.organizatorService.declineReseration(user, reservation)) {
+        this.reservations = this.organizatorService.getReservationsOrg();
+      } else {
+        window.alert("Greška prilikom odbijanja događaja. Pokušajte ponovo.")
+      }
     }
   }
 }
