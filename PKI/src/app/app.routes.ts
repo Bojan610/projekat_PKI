@@ -26,8 +26,7 @@ export const routes: Routes = [
             {
                 path: '',
                 redirectTo: 'home',
-                pathMatch: 'prefix'
-
+                pathMatch: 'full'
             },
             {
                 path: 'home',         
@@ -67,8 +66,7 @@ export const routes: Routes = [
             {
                 path: '',
                 redirectTo: 'home',
-                pathMatch: 'prefix'
-
+                pathMatch: 'full'
             },
             {
                 path: 'home',         

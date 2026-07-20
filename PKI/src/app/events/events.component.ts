@@ -23,12 +23,6 @@ export class EventsComponent {
       this.events = organizatorService.getEvents();
   }
 
-  get paginatedEvents() {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    return this.events.slice(startIndex, endIndex);
-  }
-
   get totalPages() {
     return Math.ceil(this.events.length / this.pageSize);
   }

@@ -12,6 +12,7 @@ export class LogInService {
         this.users = [
             { userName: 'organizator123', password: '123456', kindOfUser: 'organizator', firstName: 'Pera', lastName: 'Peric', tel: '+38164529557', address: 'Neznanog junaka 26' },
             { userName: 'kupac123', password: '123456', kindOfUser: 'kupac', firstName: 'Mika', lastName: 'Mikic', tel: '+38164529557', address: 'Neznanog junaka 26' },
+            { userName: 'kupac', password: '123456', kindOfUser: 'kupac', firstName: 'Zika', lastName: 'Zikic', tel: '+38164529557', address: 'Kralja Aleksandra 245' },
         ]
     }
 
@@ -35,18 +36,16 @@ export class LogInService {
     }
 
     updateUser(newUser: User):boolean { 
-        if (newUser) {
-            const index = this.users.findIndex(user => user.userName === newUser.userName);
-            if (index !== -1) {
-              this.users[index] = newUser;
-              return true;
-            } else {
-                return false;
-            }
-        }
-        else {
+        if (!newUser)
             return false;
-        }
+       
+        const index = this.users.findIndex(user => user.userName === newUser.userName);
+        if (index !== -1) {
+            this.users[index] = newUser;
+            return true;
+        } 
+
+        return false;
     }
 
     updatePassword(userName?:string, newPassword?: string):boolean {
@@ -54,9 +53,9 @@ export class LogInService {
         if (user && newPassword) {
             user.password = newPassword;
             return true;
-        } else {
-            return false;
-        }
+        } 
+
+        return false;
     }
 }
 // export const resolveUser: ResolveFn<User | undefined> = (activatedRoute: ActivatedRouteSnapshot) => {

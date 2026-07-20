@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventModel } from '../models/event.model';
 
@@ -8,7 +8,7 @@ import { EventModel } from '../models/event.model';
   templateUrl: './event-change-popup.component.html',
   styleUrl: './event-change-popup.component.css'
 })
-export class EventChangePopupComponent {
+export class EventChangePopupComponent implements OnInit {
   @Input({required: true}) modifiedEvent?: EventModel;
   @Output() close = new EventEmitter<void>();
   @Output() formParameters = new EventEmitter<{ name: string; price: number; description: string }>();
@@ -25,6 +25,14 @@ export class EventChangePopupComponent {
       validators: [Validators.required]
     })
   });
+
+  ngOnInit() {
+    this.form.patchValue({
+      name: this.modifiedEvent?.title,
+      price: this.modifiedEvent?.price?.toString(),
+      description: this.modifiedEvent?.description
+    });
+  }
 
   onSubmit() {
     if (this.form.invalid) {

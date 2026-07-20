@@ -35,10 +35,10 @@ export class EventDetailsComponent {
     }
   }
 
-   @HostListener('window:resize')
-    onResize() {
-      this.updateSlidesPerView();
-    }
+  @HostListener('window:resize')
+  onResize() {
+    this.updateSlidesPerView();
+  }
 
   selectImage(): void {
     this.fileInput.nativeElement.click();
@@ -103,17 +103,10 @@ export class EventDetailsComponent {
   closeEvent() {
     if (this.enableEdit) {
       let answer = window.confirm("Da li želite da odustanete od izmene događaja?");
-      if (answer) {
-        this.modifiedEvent = {...this.organizatorService.getEventById(this.eventToChange)!};
-        if (!this.modifiedEvent) {
-          window.alert("Došlo je do grešske. Molimo pokušajte ponovo.");
-        }
-        this.enableEdit = false;
-        this.close.emit();
-      }
-    } else {
-      this.close.emit();
+      if (!answer) 
+        return;
     }
+    this.close.emit();
   }
 
   startInterval() {

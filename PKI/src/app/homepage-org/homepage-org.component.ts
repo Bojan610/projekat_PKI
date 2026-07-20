@@ -22,6 +22,7 @@ export class HomepageOrgComponent {
 
   constructor(private organizatorService: OrganizatorService) {
     this.promotions = organizatorService.getPromotions();
+    this.promotions.push({id: this.promotions.length.toString(), image: 'placeholder_img.jpg', title: '', description: ''})
   }
 
   ngOnInit(): void {
@@ -61,6 +62,7 @@ export class HomepageOrgComponent {
   closePopup() {
     this.isPopupVisible = false;
     this.promotions = this.organizatorService.getPromotions();
+    this.promotions.push({id: this.promotions.length.toString(), image: 'placeholder_img.jpg', title: '', description: ''});
     this.startInterval();
   }
 

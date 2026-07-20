@@ -23,7 +23,6 @@ export class OrganizatorService {
         this.promotions = [
             { id: '0', image: 'first_birthday_2.png', title: 'Prvi rođendan', description: 'Organizujte prvi rođendan sa nama!' },
             { id: '1', image: '18ti_rodjendan_2.jpg', title: 'Punoletstvo', description: 'Uz nas je svaki događaj za pamćenje!' },
-            { id: '2', image: 'placeholder_img.jpg', title: '', description: '' }
         ];
 
         this.events = [
@@ -68,15 +67,20 @@ export class OrganizatorService {
         let event = this.getEventById(eventId);
         let promotion = this.getPromotionById(promotionId);
 
-        if (event && promotion) {
-            promotion.image = event.image;
-            promotion.title = event.title;
-            promotion.description = description;
-
-            return true;
-        } else {
+        if (!event)
             return false;
+
+        if (!promotion) {
+            promotion = { id: promotionId, image: event.image, title: event.title, description: description }
+            this.promotions.push(promotion);
+            return true;
         }
+
+        promotion.image = event.image;
+        promotion.title = event.title;
+        promotion.description = description;
+
+        return true;
    }
 
    getEvents() {
@@ -93,18 +97,16 @@ export class OrganizatorService {
    }
 
    updateEvent(eventToUpdate: EventModel) {
-        if (eventToUpdate) {
-            const index = this.events.findIndex(event => event.id === eventToUpdate.id);
-            if (index !== -1) {
-                this.events[index] = {...eventToUpdate};
-                return true;
-            } else {
-                return false;
-            }
-        }
-        else {
+        if (!eventToUpdate)
             return false;
-        }
+ 
+        const index = this.events.findIndex(event => event.id === eventToUpdate.id);
+        if (index !== -1) {
+            this.events[index] = {...eventToUpdate};
+            return true;
+        } 
+        
+        return false;
     }
 
     getNextEventId(): string {
@@ -126,9 +128,9 @@ export class OrganizatorService {
         if (event && review) {
             event.reviews.push(review);
             return true;
-        } else {
-            return false;
         }
+
+        return false; 
     }
 
     getAboutDescription() {
@@ -137,13 +139,12 @@ export class OrganizatorService {
 
     addToCart(eventId: string): boolean {
         const event = this.getEventById(eventId);
-        if (event) {
-            const index = this.cartItems.length;
-            this.cartItems.push({ itemId: index.toString(), eventId: event.id, eventImage: event.image, eventName: event.title, eventDate: undefined, numOfGuest: '' });
-            return true;
-        } else {
+        if (!event)
             return false;
-        }
+    
+        const index = this.cartItems.length;
+        this.cartItems.push({ itemId: index.toString(), eventId: event.id, eventImage: event.image, eventName: event.title, eventDate: undefined, numOfGuest: '' });
+        return true;  
     }
 
     removeCartItem(cartItemId: string): boolean {
