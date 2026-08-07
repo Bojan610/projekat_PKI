@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { LogInService } from '../services/login.service';
 import { format } from 'date-fns';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-cart',
@@ -18,6 +19,7 @@ import { format } from 'date-fns';
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
+  user!: User;
   cartItems: CartItem[] = []; 
   selectedDate: Date[] = [];
   selectedOption: string[] = [];
@@ -32,18 +34,16 @@ export class CartComponent {
     { value: '50', viewValue: '50' },
   ];
 
-
   ngOnInit() {
-    this.cartItems = this.organizatorService.getCartItems();
+    this.user = this.logInService.getUser(sessionStorage.getItem('user')!);
+    this.cartItems = this.organizatorService.getCartItems(this.user.userName);
   }
   
-
   reserveEvent(cartItem: CartItem) {
     if (cartItem.eventDate && cartItem.numOfGuest) {
-      const user = this.logInService.getUser(sessionStorage.getItem('user')!);
       cartItem.eventDate = format(cartItem.eventDate, 'dd.MM.yyyy');
-      if (this.organizatorService.reserveEvent(cartItem, user)) {
-        this.cartItems = this.organizatorService.getCartItems();
+      if (this.organizatorService.reserveEvent(cartItem, this.user)) {
+        this.cartItems = this.organizatorService.getCartItems(this.user.userName);
         window.alert("Događaj uspešno rezervisan!");
       } else {
         window.alert("Greška prilokom rezervacije događaja. Pokušajte ponovo.");
@@ -53,7 +53,7 @@ export class CartComponent {
 
   removeEvent(cartItemId: string) {
     if (this.organizatorService.removeCartItem(cartItemId)) {
-      this.cartItems = this.organizatorService.getCartItems();
+      this.cartItems = this.organizatorService.getCartItems(this.user.userName);
       window.alert("Događaj uspešno obrisan iz korpe!");
     } else {
       window.alert("Greška prilikom brisanja događaja iz korpe. Pokušajte ponovo.")

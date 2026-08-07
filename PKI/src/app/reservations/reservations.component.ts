@@ -11,10 +11,12 @@ import { NgFor } from '@angular/common';
 })
 export class ReservationsComponent {
   reservations: Reservation[] = []; 
+  username: string = ''
 
  constructor(private organizatorService: OrganizatorService) { }
 
   ngOnInit() {
-    this.reservations = this.organizatorService.getReservations();
+    this.username = sessionStorage.getItem('user')!;
+    this.reservations = this.organizatorService.getReservations(this.username);
   } 
 }

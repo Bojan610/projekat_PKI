@@ -1,5 +1,6 @@
 export interface Reservation {
     reservationId: string,
+    username: string,
     eventImage: string,
     eventName: string,
     userReserved: string,

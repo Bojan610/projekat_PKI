@@ -137,13 +137,13 @@ export class OrganizatorService {
         return this.aboutDescription;
     }
 
-    addToCart(eventId: string): boolean {
+    addToCart(eventId: string, username: string): boolean {
         const event = this.getEventById(eventId);
-        if (!event)
+        if (!event || !username)
             return false;
     
         const index = this.cartItems.length;
-        this.cartItems.push({ itemId: index.toString(), eventId: event.id, eventImage: event.image, eventName: event.title, eventDate: undefined, numOfGuest: '' });
+        this.cartItems.push({ itemId: index.toString(), userName: username, eventId: event.id, eventImage: event.image, eventName: event.title, eventDate: undefined, numOfGuest: '' });
         return true;  
     }
 
@@ -152,54 +152,45 @@ export class OrganizatorService {
         return true;
     }
 
-    getCartItems() {
-        return [ ...this.cartItems ];
+    getCartItems(username: string) {
+        return this.cartItems.filter(item => item.userName === username);
     }
 
     reserveEvent(cartItem: CartItem, user: User):boolean {
-        if (cartItem && user) {
-            const index = this.reservations.length;
-            this.reservations.push({ reservationId: index.toString(), eventImage: cartItem.eventImage, eventName: cartItem.eventName, userReserved: user.firstName + ' ' + user.lastName, date: cartItem.eventDate!, numOfGuest: cartItem.numOfGuest, status: 'Na čekanju'});
-            this.removeCartItem(cartItem.itemId);
-            return true;
-        } else {
+        if (!cartItem || !user)
             return false;
-        }
+
+        const index = this.reservations.length;
+        this.reservations.push({ reservationId: index.toString(), username: user.userName, eventImage: cartItem.eventImage, eventName: cartItem.eventName, userReserved: user.firstName + ' ' + user.lastName, date: cartItem.eventDate!, numOfGuest: cartItem.numOfGuest, status: 'Na čekanju'});
+        this.removeCartItem(cartItem.itemId);
+        return true;
     }
 
-    getReservations() {
-        return [ ... this.reservations ];
+    getReservations(username: string) {
+        return this.reservations.filter(item => item.username === username);
     }
 
     getReservationsOrg() {
-        let retVal: Reservation[] = [];
-        this.reservations.forEach((item) => {
-           if (item.status === 'Na čekanju') {
-            retVal.push(item);
-           }
-        });
-        return retVal;
+        return this.reservations.filter(item => item.status === 'Na čekanju');
     }
 
     acceptReservation(user: User, res: Reservation): boolean {
-        if (res && user) {
-            res.status = "Odobreno";
-            const index = this.notifications.length;
-            this.notifications.push({ id: index!.toString(), user: user.firstName + ' ' + user.lastName, eventName: res.eventName, description: 'je prihvatio vašu rezervaciju za dogadjaj', date: format(new Date(), 'dd.MM.yyyy') + ' ⦁ ' + format(new Date(), 'HH:mm'), read: false });
-            return true;
-        } else {
-            return false
-        }
+        if (!res || !user)
+            return false;
+
+        res.status = "Odobreno";
+        const index = this.notifications.length;
+        this.notifications.push({ id: index!.toString(), user: user.firstName + ' ' + user.lastName, eventName: res.eventName, description: 'je prihvatio vašu rezervaciju za dogadjaj', date: format(new Date(), 'dd.MM.yyyy') + ' ⦁ ' + format(new Date(), 'HH:mm'), read: false });
+        return true;
     }
 
     declineReseration(user:User, res: Reservation): boolean {
-        if (res && user) {
-            res.status = "Odbijeno";
-            const index = this.notifications.length;
-            this.notifications.push({ id: index!.toString(), user: user.firstName + ' ' + user.lastName, eventName: res.eventName, description: 'je odbio vašu rezervaciju za dogadjaj', date: format(new Date(), 'dd.MM.yyyy') + ' ⦁ ' + format(new Date(), 'HH:mm'), read: false });
-            return true;
-        } else {
-            return false
-        }
+        if (!res || !user)
+            return false;
+
+        res.status = "Odbijeno";
+        const index = this.notifications.length;
+        this.notifications.push({ id: index!.toString(), user: user.firstName + ' ' + user.lastName, eventName: res.eventName, description: 'je odbio vašu rezervaciju za dogadjaj', date: format(new Date(), 'dd.MM.yyyy') + ' ⦁ ' + format(new Date(), 'HH:mm'), read: false });
+        return true;
     }
 }

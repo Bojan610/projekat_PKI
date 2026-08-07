@@ -4,7 +4,6 @@ import { OrganizatorService } from '../services/organizator.service';
 import { NgFor, NgIf } from '@angular/common';
 import { AboutUsComponent } from "../about-us/about-us.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Review } from '../models/review.model';
 import { LogInService } from '../services/login.service';
 
 @Component({
@@ -24,6 +23,7 @@ export class EventDetailsKupacComponent {
   stars = [1, 2, 3, 4, 5]; // Array for 5 stars
   rating = 0; // Selected rating
   reviewLeft: boolean = false;
+  user: string = '';
 
   constructor(private organizatorService: OrganizatorService, private logInService: LogInService) { }
 
@@ -40,9 +40,9 @@ export class EventDetailsKupacComponent {
     } else {
       this.updateSlidesPerView();
       this.startInterval();
-      const user = sessionStorage.getItem('user');
+      this.user = sessionStorage.getItem('user')!;
       for (const review of this.event.reviews) {
-        if (review.username === user) {
+        if (review.username === this.user) {
             this.reviewLeft = true;
             break;
         }
@@ -56,7 +56,7 @@ export class EventDetailsKupacComponent {
   }
 
   addToCart() {
-    if (this.organizatorService.addToCart(this.eventToOpen)) {
+    if (this.organizatorService.addToCart(this.eventToOpen, this.user)) {
       window.alert("Događaj uspešno dodat u korpu!");
     } else {
       window.alert("Greška prilikom dodavanja događaja u korpu.");
