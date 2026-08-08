@@ -51,8 +51,8 @@ export class OrganizatorService {
         this.aboutDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate purus nec laoreet malesuada. Nam laoreet sagittis elit at volutpat. Ut leo urna, luctus et augue et, suscipit pulvinar sem. Nunc cursus arcu id fringilla fringilla. Cras ullamcorper ex ac nibh tincidunt, quis fringilla nibh molestie. Nam hendrerit quis odio fermentum consectetur. Vivamus vestibulum convallis felis, ut posuere velit mattis ut. Proin vel porttitor orci. Morbi aliquet blandit rhoncus. Morbi et tortor varius, rutrum odio vel, congue orci.';
     }
 
-   getNotofications() {
-    return this.notifications;
+   getNotifications(username: string) {
+    return this.notifications.filter(item => item.username === username);
    }
 
    getPromotions() {
@@ -180,7 +180,7 @@ export class OrganizatorService {
 
         res.status = "Odobreno";
         const index = this.notifications.length;
-        this.notifications.push({ id: index!.toString(), user: user.firstName + ' ' + user.lastName, eventName: res.eventName, description: 'je prihvatio vašu rezervaciju za dogadjaj', date: format(new Date(), 'dd.MM.yyyy') + ' ⦁ ' + format(new Date(), 'HH:mm'), read: false });
+        this.notifications.push({ id: index!.toString(), admin: user.firstName + ' ' + user.lastName, username: res.username, eventName: res.eventName, description: 'je prihvatio vašu rezervaciju za dogadjaj', date: format(new Date(), 'dd.MM.yyyy') + ' ⦁ ' + format(new Date(), 'HH:mm'), read: false });
         return true;
     }
 
@@ -190,7 +190,7 @@ export class OrganizatorService {
 
         res.status = "Odbijeno";
         const index = this.notifications.length;
-        this.notifications.push({ id: index!.toString(), user: user.firstName + ' ' + user.lastName, eventName: res.eventName, description: 'je odbio vašu rezervaciju za dogadjaj', date: format(new Date(), 'dd.MM.yyyy') + ' ⦁ ' + format(new Date(), 'HH:mm'), read: false });
+        this.notifications.push({ id: index!.toString(), admin: user.firstName + ' ' + user.lastName, username: res.username, eventName: res.eventName, description: 'je odbio vašu rezervaciju za dogadjaj', date: format(new Date(), 'dd.MM.yyyy') + ' ⦁ ' + format(new Date(), 'HH:mm'), read: false });
         return true;
     }
 }

@@ -1,6 +1,7 @@
 export interface Notification {
     id: string,
-    user: string,
+    admin: string,
+    username: string,
     eventName: string,
     description: string,
     date?: string,

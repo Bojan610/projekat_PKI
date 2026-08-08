@@ -16,7 +16,7 @@
                         <div class="item" *ngFor="let notification of notifications">
                             <div class="row-1">
                                 <i class="bi bi-person-circle person-img" [class.read]="notification.read"></i>                           
-                                <p class="description"><span class="bold">{{notification.user}}</span> {{notification.description}} - <span class="bold">{{notification.eventName}}</span></p>                                                    
+                                <p class="description"><span class="bold">{{notification.admin}}</span> {{notification.description}} - <span class="bold">{{notification.eventName}}</span></p>                                                    
                                 <i *ngIf="!notification.read" class="dot"></i>
                             </div>
                             <div class="row-2">
@@ -55,7 +55,7 @@
                             <div class="item" *ngFor="let notification of notifications">
                                 <div class="row-1">
                                     <i class="bi bi-person-circle person-img" [class.read]="notification.read"></i>                           
-                                    <p class="description"><span class="bold">{{notification.user}}</span> {{notification.description}} - <span class="bold">{{notification.eventName}}</span></p>                                                    
+                                    <p class="description"><span class="bold">{{notification.admin}}</span> {{notification.description}} - <span class="bold">{{notification.eventName}}</span></p>                                                    
                                     <i *ngIf="!notification.read" class="dot"></i>
                                 </div>
                                 <div class="row-2">

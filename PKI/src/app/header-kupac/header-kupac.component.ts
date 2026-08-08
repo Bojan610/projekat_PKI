@@ -19,7 +19,8 @@ export class HeaderKupacComponent {
   constructor(private organizatorService: OrganizatorService) {}
 
   ngOnInit() {
-    this.notifications =  this.organizatorService.getNotofications();
+    const username = sessionStorage.getItem('user')!;
+    this.notifications =  this.organizatorService.getNotifications(username);
     this.unreadNotifications = this.notifications.filter(item => item.read === false);
   }
 
