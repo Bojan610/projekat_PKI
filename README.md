@@ -67,26 +67,39 @@ There is **no HTTP backend**. State is held in two root-provided injectable serv
 Domain models are defined as TypeScript interfaces in `src/app/models/`:
 `User`, `EventModel`, `Review`, `Promotion`, `CartItem`, `Reservation`, `Notification`.
 
-### Project Structure
+## Project Structure
+
+```
 src/app/
-├── models/                     # TypeScript domain interfaces
-├── services/                   # LogInService, OrganizatorService (in-memory state)
-├── authGuard/                  # AuthGuard (CanActivate)
-├── login/  logout/             # Authentication
-├── organizator/  kupac/        # Role-specific layout shells (route trees)
-├── header/  header-kupac/      # Role-specific navigation headers
-├── homepage-org/  homepage-kupac/
-├── events/  events-kupac/      # Event listing (paginated)
-├── event-details/  event-details-kupac/
-├── add-event/  event-change-popup/
-├── promotions-popup/           # Promotion add/edit dialog
-├── cart/  reservations/        # Consumer cart & reservations
-├── reservations-organizator/   # Admin reservation requests
-├── my-profile/  change-password-popup/
-├── about-us/
-├── not-found/  unauthorized/   # Error routes
-├── app.routes.ts               # Route definitions (lazy-loaded)
-└── app.config.ts               # App-level providers
+├─ models/                    # TypeScript domain interfaces
+├─ services/                  # LogInService, OrganizatorService (in-memory state)
+├─ authGuard/                 # AuthGuard (CanActivate)
+├─ login/                     # Authentication
+├─ logout/
+├─ organizator/              # Admin layout shell (route tree)
+├─ kupac/                     # Consumer layout shell (route tree)
+├─ header/                    # Admin navigation header
+├─ header-kupac/              # Consumer navigation header
+├─ homepage-org/
+├─ homepage-kupac/
+├─ events/                    # Admin event listing (paginated)
+├─ events-kupac/              # Consumer event listing (paginated)
+├─ event-details/
+├─ event-details-kupac/
+├─ add-event/
+├─ event-change-popup/        # Event edit dialog
+├─ promotions-popup/          # Promotion add/edit dialog
+├─ cart/                      # Consumer reservation cart
+├─ reservations/              # Consumer reservations
+├─ reservations-organizator/  # Admin reservation requests
+├─ my-profile/
+├─ change-password-popup/
+├─ about-us/
+├─ not-found/                 # 404 route
+├─ unauthorized/              # Unauthorized route
+├─ app.routes.ts              # Route definitions (lazy-loaded)
+└─ app.config.ts              # App-level providers
+```
 
 ---
 
@@ -158,10 +171,11 @@ The following users are seeded at startup:
 ```bash
 npm install
 ng serve
+```
 
 Then open http://localhost:4200/. The app reloads automatically on source changes.
 
-📄 Notes
+**###** 📄 **Notes**
 * The app is responsive — it works across different resolutions and devices, including a dedicated mobile navigation menu.
 * The app implements no data persistence. All state is held in memory and is reset to its initial seeded state on page refresh.
 * The interface language is Serbian.
